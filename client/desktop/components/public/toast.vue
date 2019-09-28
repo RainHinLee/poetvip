@@ -55,6 +55,7 @@
 	line-height 1.3
 	border-radius 3px
 	z-index 1000000
+	animation fadeIn 300ms forwards
 	&.error
 		background $color-danger
 	&.success

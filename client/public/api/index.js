@@ -1,11 +1,13 @@
 
+import axios from "axios";
 import customer from "./customer.js";
 import poem from "./poem.js";
-import axios from "axios";
+import poetry from "./poetry.js";
+
 
 axios.interceptors.response.use(successHandler,errorHandler)
 
-export default {customer,poem};
+export default {customer,poem,poetry};
 
 //--成功响应拦截器
 function successHandler(res){

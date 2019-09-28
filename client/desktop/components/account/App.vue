@@ -37,8 +37,7 @@
 			sides(){
 				var path = this.$route.fullPath;
 				return [
-					{title:"我的诗集", link: "#/poetry", icon: "iconshujia1", isActive: path.startsWith("/poetry"), target:"" },
-					{title:"我的诗歌", link: "#/poem", icon: "iconshujia", isActive: path.startsWith("/poem"), target:""},
+					{title:"我的诗集", link: "#/poetry", icon: "iconshujia", isActive: path.startsWith("/poetry"), target:"" },
 					{title:"写作台", link: "/worker", icon: "iconxiezi", isActive: path.startsWith("/worker"), target:"_blank"},
 					{title:"设置", link: "#/setting", icon: "iconicon-test", isActive: path.startsWith("/setting"), target:""}
 				]

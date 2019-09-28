@@ -22,7 +22,7 @@
 						</div>
 						<p class="customer-progress-desc">试用期剩余12天</p>
 						<p class="customer-upgrade">
-							<a href="/price">升级</a>
+							<a class="is-btn is-success" href="/price">升级</a>
 						</p>
 						<div class="customer-user-drop">
 							<a><img src="https://froont.com/rainhinlee/-avatar"></a>
@@ -35,7 +35,10 @@
 					</div>
 				</template>
 				<template v-else>
-					<p class="uncustomer"><a href="/user/login">登录</a><a href="/user/register">注册</a></p>
+					<p class="uncustomer">
+						<a href="/user/login">登录</a>
+						<a href="/user/register">注册</a>
+					</p>
 				</template>	
 			</section>
 		</pv-page>	
@@ -181,19 +184,9 @@
 				padding-left 20px
 				color #bcbdc0
 			.customer-upgrade
-				a
-					display inline-flex
-					width 70px
-					margin-left 10px
-					height 30px
-					background $color-success
-					color inherit
-					border-radius 5px
-					align-items center
-					justify-content center
-					transition background 300ms
-					&:hover
-						background $color-light-success
+				width 70px
+				height 30px
+				margin-left 10px
 			.customer-user-drop
 				position relative
 				display inline-flex

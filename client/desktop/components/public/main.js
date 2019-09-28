@@ -13,6 +13,9 @@ import Header from "./header.vue";
 import Page from "./page.vue";
 import Editor from "./editor.vue";
 import Poem from "./poem.vue";
+import Layer from "./layer.vue";
+import Loading from "./loading.vue";
+import PSelect from "./select.vue";
 
 
 Vue.use(Vuex);
@@ -24,6 +27,10 @@ Vue.component("pv-page", Page);
 Vue.component("pv-header",Header);
 Vue.component("pv-editor",Editor);
 Vue.component("pv-poem", Poem);
+Vue.component("pv-layer", Layer);
+Vue.component("pv-loading", Loading);
+Vue.component("pv-select", PSelect);
+
 
 Vue.createAPI(Toast, false);
 Vue.createAPI(Dialog, false);

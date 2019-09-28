@@ -5,6 +5,8 @@
 const UserCode = require("../models/code.js"); //--验证码
 const Customer = require("../models/customer.js"); //--用户
 const Poem = require("../models/poem.js");
+const Poetry = require("../models/poetry.js");
+
 const session = require("./session.js"); //--会话
 
 module.exports = {
@@ -100,31 +102,74 @@ module.exports = {
 		add(req,res){  //---增加诗歌
 			let data = req.body;
 			let uid = req.user._id;
-			new Poem(Object.assign({},data,{create_author: uid})).save().then(result=>{
-				res.send(result)
+			let poetry_id = data.poetry; 
+			let values = Object.assign({},data,{create_author: uid})
+
+			Poetry.findById(poetry_id).then(doc=>{  //--先检测诗集是否存在
+				if(!doc) return Promise.reject({message:"诗集不存在"}) // ---诗集不存在
+				new Poem(values).save().then(doc1=>{ //--保存诗歌
+					Poetry.poemsChange('add',poetry_id, doc1._id); //--将诗歌添加到诗集中
+					res.send(doc)
+				});
+			}).catch(err=>{
+				res.status(300);
+				res.send({text: err.message});
+			});
+		},
+
+		update(req,res){ //---更新诗歌，将诗歌从原来的诗集移除，
+			let poem_id = req.body._id;
+			let poetry_id = req.body.poetry
+			delete req.body._id;  //--将id移除
+
+			Poem.findById(poem_id).then(doc=>{ //--查找当前poetry
+				return doc.update(req.body).then(doc1=>{
+					if(poetry_id !=  doc.poetry){ //--新旧诗集不一样
+						Poetry.poemsChange('add', poetry_id, poem_id); //--将是个添加到新诗集中；
+						Poetry.poemsChange("delete", doc.poetry, poem_id); //--从旧诗集中移除诗歌
+					};
+					res.send(doc1);
+				});
 			}).catch(err=>{
 				res.status(300);
 				res.send({text: err.message})	
-			})
+			});
 		},
+	},
 
-		update(req,res){ //---更新诗歌
-			let poem_id = req.body._id;
-			let cloneobj = JSON.parse(JSON.stringify(req.body))
-			delete req.body._id;
-			Poem.findOneAndUpdate(poem_id,req.body).then(()=>{
-				res.send(cloneobj)
+	poetry:{
+		getList(req,res){
+			Poetry.find().then(doc=>{
+				res.send({data:doc});
 			}).catch(err=>{
 				res.status(300);
 				res.send({text: err.message})					
-			})
+			});
 		},
 
-		delete(){ //--删除诗歌
+		create(req,res){  //---新建诗集
+			let data = 	Object.assign({},req.body,{
+				poems: [],   //--存放poem._id 
+				author_id: req.user._id,   //---创建者id
+			});
+
+			Poetry.findOne({name: data.name}).then(doc=>{
+				return doc ? Promise.reject({message: "诗集已存在"}) : new Poetry(data).save()
+			}).then(doc=>{
+				res.send(doc)
+			}).catch(err=>{
+				res.status(300);
+				res.send({text: err.message})		
+			})
+			// res.send(data);
+		},
 
 
-		}
+
+
 	}
+
+
 
 
 }

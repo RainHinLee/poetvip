@@ -1,7 +1,12 @@
-<!-- 滚动组件 -->
+<!-- 
+	滚动组件
+	
+	props: bar
+
+ -->
 
 <template>
-	<div class="scroll-app" ref="el">
+	<div class="scroll-app" :class="{'hidebar': !bar}" ref="el">
 		<slot></slot>
 	</div>
 </template>
@@ -9,6 +14,12 @@
 <script>
 	import Scrollbar from "smooth-scrollbar"
 	export default {
+		props:{
+			bar:{
+				type: Boolean,
+				default: true
+			}
+		},
 		methods:{
 			init(){
 				return Scrollbar.init(this.$refs.el,{
@@ -27,8 +38,8 @@
 	}
 </script>
 
-<style lang="stylus" scoped="">
 
+<style lang="stylus" scoped="">
 .scroll-app
 	position relative
 	width 100%
@@ -36,7 +47,11 @@
 	overflow hidden
 </style>
 <style lang="stylus">
-.scrollbar-track
-	&.scrollbar-track-y
-		background transparent
+.scroll-app
+	&.hidebar
+		.scrollbar-track
+			opacity 0 
+	.scrollbar-track
+		&.scrollbar-track-y
+			background transparent
 </style>

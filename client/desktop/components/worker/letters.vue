@@ -22,6 +22,8 @@
 
 <script>
 
+	import config from "./config.js";
+
 	export default {
 		props:{
 			list:{
@@ -37,7 +39,7 @@
 
 		methods:{
 			select(letter){
-				this.$emit("select",letter)
+				config.dispatcher.$emit("letter:select",letter)
 			}
 		},
 

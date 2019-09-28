@@ -9,7 +9,7 @@
 			<template v-if="type=='letters'">
 				<pv-scroll>
 					<div class="letters-box">
-						<p-letters :list="letters" :letter="poem.letter" @select="selectLetter"/>
+						<p-letters :list="letters" :letter="poem.letter"/>
 					</div>
 				</pv-scroll>	
 			</template>
@@ -47,11 +47,6 @@
 		methods:{
 			tabChange(data,index){
 				this.type=data.type;
-			},
-
-			selectLetter(letter){  //---样式改变
-				console.log(letter)
-				this.poem.letter = letter;
 			}
 		},
 
