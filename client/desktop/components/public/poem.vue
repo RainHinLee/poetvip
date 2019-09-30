@@ -49,22 +49,12 @@
 		<template v-if="type=='edit'">
 			<!-- 工具按钮 -->
 			<div class="is-toptip">
-				<p>
-					<a @click="setStyle('textAlign','left')" :class="{'is-active': poem.style.textAlign=='left'}">
-						<span><i class="iconfont iconzuoduiqi1"></i></span>左对齐
-					</a>
-					<a @click="setStyle('textAlign','center')":class="{'is-active': poem.style.textAlign=='center'}">
-						<span><i class="iconfont iconjuzhong"></i></span>居中
-					</a>
-					<a @click="setStyle('textAlign','right')" :class="{'is-active': poem.style.textAlign=='right'}">
-						<span><i class="iconfont iconyouduiqicopy"></i></span>右对齐
-					</a>
-
-					<a class="fonts">字体： <span> <pv-select :list="fonts" @select="selectFont"/>	</span></a>
-
-
+				<p class="is-left">
+					<a>对齐：<span> <pv-select :list="alignItems" @select="setAlign"/>	</span></a>
+					<a>字体： <span> <pv-select :list="fonts" @select="selectFont"/>	</span></a>
+					<a>字号： <span> <pv-select :list="sizes" @select="selectFontSize"/>	</span></a>
 				</p>
-				<p>
+				<p class="is-right">
 					<template v-if="loading.save">
 						<a>正在保存...</a>
 					</template>
@@ -90,7 +80,17 @@
 <script>
 
 import util from "util";
-import api from "api"
+import api from "api";
+
+
+const FONTS_STYLE = {
+	"default": { fontSize: "16px", color: "#444", fontFamily:"inherit"},
+	"繁杂体": { fontSize: "20px", color: "#222", fontFamily:"繁杂体"},
+	"槑萌体": {fontSize: "20px", color: "#222", fontFamily:"槑萌体"},
+	"下午茶体": {fontSize: "20px", color: "#222", fontFamily:"下午茶体"},
+	"意趣体": {fontSize: "20px", color: "#222", fontFamily:"意趣体"},
+	"篆体": {fontSize: "20px", color: "#222", fontFamily:"篆体"},	
+}
 
 export default {
 	props:{
@@ -118,10 +118,6 @@ export default {
 	},
 
 	methods:{
-		setStyle(key,value){
-			this.poem.style[key] = value;
-		},
-
 		submit(){  //--提交
 			if(!this.validate()) return;  //--校验数据
 
@@ -157,9 +153,6 @@ export default {
 
 		validate(){
 			let {title,author_name,body,poetry} = this.poem;
-
-			console.log(this.poem)
-
 			if(title.length==0){
 				this.$toast("诗歌标题未输入",'error');
 				return false
@@ -181,8 +174,19 @@ export default {
 		},
 
 		selectFont(data){  //---选择字体
-			let fontFamily = data.value;
+			let name = data.value || "default";
+			let style = FONTS_STYLE[data.value];
+			Object.assign(this.poem.style,style);
+			data.file && util.loadFont(name, data.file);
 		},
+
+		setAlign(data){
+			this.poem.style.textAlign = data.value;
+		},
+
+		selectFontSize(data){
+
+		},		
 
 		showMesasge(message,type){
 			Object.assign(this.message,{text: message,type});
@@ -197,21 +201,32 @@ export default {
 	computed:{
 		fonts(){
 			return [
-				{text: "繁杂体", value:"繁杂体"},
-				{text: "槑萌体", value:"槑萌体"},
-				{text: "下午茶体", value:"下午茶体"},
-				{text: "意趣体", value:"意趣体"},
-				{text: "篆体", value:"篆体"}
+				{text: "默认", value:"default", file:""},
+				{text: "下午茶体", value:"下午茶体", file: "/public/statics/fonts/下午茶.ttf"},
+				{text: "槑萌体", value:"槑萌体", file: "/public/statics/fonts/槑萌体.ttf"},
+				{text: "篆体", value:"篆体", file: "/public/statics/fonts/篆体.ttf"}
+				// {text: "繁杂体", value:"繁杂体",  file: "/public/statics/fonts/繁杂体.ttf"},
+				// {text: "意趣体", value:"意趣体",  file: "/public/statics/fonts/意趣体.ttf"},
 			]
+		},
+
+		alignItems(){
+			return [
+				{text: "居中",value:"center"},
+				{text: "左对齐",value:"left"},
+				{text: "右对齐",value:"right"},
+			]
+		},
+
+		sizes(){
+			return [
+				{text: "小",value:"small"},
+				{text: "中",value:"normal"},
+				{text: "大",value:"big"},
+			]			
 		}
+
 	},
-
-	mounted(){
-		
-
-
-
-	}
 }
 
 </script>
@@ -222,6 +237,7 @@ export default {
 	height 100%
 	overflow hidden
 	position relative
+	color #222
 	&:hover
 		.is-toptip
 			transform translateY(0px)
@@ -283,8 +299,23 @@ export default {
 		background #222
 		transform translateY(-100%)
 		transition 600ms
-		p
-			>a
+		p.is-left
+			a
+				display inline-flex
+				align-items center
+				justify-content center
+				height 24px
+				cursor pointer
+				color #d0d2d3
+				margin-right 5px
+				span
+					color #444
+					display inline-flex
+					width 90px
+					background transparent
+					border-radius 3px
+		p.is-right
+			a
 				display inline-flex
 				align-items center
 				justify-content center
@@ -294,18 +325,11 @@ export default {
 				cursor pointer
 				margin-left 15px
 				transition 300ms
-				&:not(.fonts):hover
-				&.is-active
+				&:hover
 					opacity 0.6
 				span
 					margin-right 4px
-				&.fonts
-					span
-						color #444
-						display inline-flex
-						width 120px
-						background transparent
-						border-radius 3px
+
 	.is-message
 		position absolute
 		z-index 5
@@ -331,9 +355,13 @@ export default {
 
 <style lang="stylus">
 .poem-widget
-	.select-arrow
-		right 0px !important
-	input
-		padding 0px 10px	
-		cursor pointer
+	.select-widget
+		.select-arrow
+			right 0px !important
+		a.select-panel
+			span
+				padding 6px 10px
+		input
+			padding 0px 10px	
+			cursor pointer
 </style>

@@ -59,7 +59,16 @@
 			makeExpandingArea(){ //--js计算textera 高度
         this.$refs.textarea.style.height = 'auto';
         this.$refs.textarea.style.height = this.$refs.textarea.scrollHeight + 'px';
-			}
+			},
+
+			refresh(){
+				if(window.requestAnimationFrame){
+					this.timer = window.requestAnimationFrame(function (){
+						this.makeExpandingArea();
+						this.refresh();
+					}.bind(this))
+				}
+			},
 		},
 
 		watch:{
@@ -67,13 +76,16 @@
 				deep: true,
 				handler(){
 					this.$emit("change",this.encode());
-					this.autoHeight && this.makeExpandingArea();
 				}
 			}
 		},
 
 		mounted(){
-			this.autoHeight && this.makeExpandingArea();
+			this.refresh();  //--更新
+		},
+
+		destroyed(){
+			this.timer && window.cancelAnimationFrame(this.timer)
 		}
 	}
 

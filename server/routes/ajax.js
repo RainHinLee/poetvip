@@ -6,6 +6,7 @@ const UserCode = require("../models/code.js"); //--验证码
 const Customer = require("../models/customer.js"); //--用户
 const Poem = require("../models/poem.js");
 const Poetry = require("../models/poetry.js");
+const util = require("./util.js");
 
 const session = require("./session.js"); //--会话
 
@@ -135,6 +136,9 @@ module.exports = {
 				res.send({text: err.message})	
 			});
 		},
+
+
+
 	},
 
 	poetry:{

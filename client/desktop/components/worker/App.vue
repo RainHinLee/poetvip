@@ -81,8 +81,8 @@
 					],
 					style:{
 						"textAlign" : "center",
-						"fontFamily" : "启功字体",
-						"fontSize": "20px"
+						"fontFamily" : "",
+						"fontSize": "16px"
 					},
 					poetry: "",
 				},

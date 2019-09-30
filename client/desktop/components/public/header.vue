@@ -240,6 +240,7 @@
 							color #7b8cf6
 							background #e9ecff
 						a
+							width 100%					
 							color inherit
-						
+							display inline-flex
 </style>

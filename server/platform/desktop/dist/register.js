@@ -21183,6 +21183,14 @@ exports.default = {
 			//--js计算textera 高度
 			this.$refs.textarea.style.height = 'auto';
 			this.$refs.textarea.style.height = this.$refs.textarea.scrollHeight + 'px';
+		},
+		refresh: function refresh() {
+			if (window.requestAnimationFrame) {
+				this.timer = window.requestAnimationFrame(function () {
+					this.makeExpandingArea();
+					this.refresh();
+				}.bind(this));
+			}
 		}
 	},
 
@@ -21191,13 +21199,15 @@ exports.default = {
 			deep: true,
 			handler: function handler() {
 				this.$emit("change", this.encode());
-				this.autoHeight && this.makeExpandingArea();
 			}
 		}
 	},
 
 	mounted: function mounted() {
-		this.autoHeight && this.makeExpandingArea();
+		this.refresh(); //--更新
+	},
+	destroyed: function destroyed() {
+		this.timer && window.cancelAnimationFrame(this.timer);
 	}
 };
 
@@ -21409,17 +21419,16 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
+
+var FONTS_STYLE = {
+	"default": { fontSize: "16px", color: "#444", fontFamily: "inherit" },
+	"繁杂体": { fontSize: "20px", color: "#222", fontFamily: "繁杂体" },
+	"槑萌体": { fontSize: "20px", color: "#222", fontFamily: "槑萌体" },
+	"下午茶体": { fontSize: "20px", color: "#222", fontFamily: "下午茶体" },
+	"意趣体": { fontSize: "20px", color: "#222", fontFamily: "意趣体" },
+	"篆体": { fontSize: "20px", color: "#222", fontFamily: "篆体" }
+};
 
 exports.default = {
 	props: {
@@ -21448,9 +21457,6 @@ exports.default = {
 
 
 	methods: {
-		setStyle: function setStyle(key, value) {
-			this.poem.style[key] = value;
-		},
 		submit: function submit() {
 			var _this = this;
 
@@ -21495,9 +21501,6 @@ exports.default = {
 			    body = _poem.body,
 			    poetry = _poem.poetry;
 
-
-			console.log(this.poem);
-
 			if (title.length == 0) {
 				this.$toast("诗歌标题未输入", 'error');
 				return false;
@@ -21519,8 +21522,15 @@ exports.default = {
 		},
 		selectFont: function selectFont(data) {
 			//---选择字体
-			var fontFamily = data.value;
+			var name = data.value || "default";
+			var style = FONTS_STYLE[data.value];
+			Object.assign(this.poem.style, style);
+			data.file && _util2.default.loadFont(name, data.file);
 		},
+		setAlign: function setAlign(data) {
+			this.poem.style.textAlign = data.value;
+		},
+		selectFontSize: function selectFontSize(data) {},
 		showMesasge: function showMesasge(message, type) {
 			var _this3 = this;
 
@@ -21535,11 +21545,18 @@ exports.default = {
 
 	computed: {
 		fonts: function fonts() {
-			return [{ text: "繁杂体", value: "繁杂体" }, { text: "槑萌体", value: "槑萌体" }, { text: "下午茶体", value: "下午茶体" }, { text: "意趣体", value: "意趣体" }, { text: "篆体", value: "篆体" }];
+			return [{ text: "默认", value: "default", file: "" }, { text: "下午茶体", value: "下午茶体", file: "/public/statics/fonts/下午茶.ttf" }, { text: "槑萌体", value: "槑萌体", file: "/public/statics/fonts/槑萌体.ttf" }, { text: "篆体", value: "篆体", file: "/public/statics/fonts/篆体.ttf"
+				// {text: "繁杂体", value:"繁杂体",  file: "/public/statics/fonts/繁杂体.ttf"},
+				// {text: "意趣体", value:"意趣体",  file: "/public/statics/fonts/意趣体.ttf"},
+			}];
+		},
+		alignItems: function alignItems() {
+			return [{ text: "居中", value: "center" }, { text: "左对齐", value: "left" }, { text: "右对齐", value: "right" }];
+		},
+		sizes: function sizes() {
+			return [{ text: "小", value: "small" }, { text: "中", value: "normal" }, { text: "大", value: "big" }];
 		}
-	},
-
-	mounted: function mounted() {}
+	}
 };
 
 /***/ }),
@@ -21778,51 +21795,40 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     }
   })], 1)] : _vm._e()], 2)]), _vm._v(" "), (_vm.type == 'edit') ? [_c('div', {
     staticClass: "is-toptip"
-  }, [_c('p', [_c('a', {
-    class: {
-      'is-active': _vm.poem.style.textAlign == 'left'
+  }, [_c('p', {
+    staticClass: "is-left"
+  }, [_c('a', [_vm._v("对齐："), _c('span', [_c('pv-select', {
+    attrs: {
+      "list": _vm.alignItems
     },
     on: {
-      "click": function($event) {
-        return _vm.setStyle('textAlign', 'left')
-      }
+      "select": _vm.setAlign
     }
-  }, [_vm._m(0), _vm._v("左对齐\n\t\t\t\t")]), _vm._v(" "), _c('a', {
-    class: {
-      'is-active': _vm.poem.style.textAlign == 'center'
-    },
-    on: {
-      "click": function($event) {
-        return _vm.setStyle('textAlign', 'center')
-      }
-    }
-  }, [_vm._m(1), _vm._v("居中\n\t\t\t\t")]), _vm._v(" "), _c('a', {
-    class: {
-      'is-active': _vm.poem.style.textAlign == 'right'
-    },
-    on: {
-      "click": function($event) {
-        return _vm.setStyle('textAlign', 'right')
-      }
-    }
-  }, [_vm._m(2), _vm._v("右对齐\n\t\t\t\t")]), _vm._v(" "), _c('a', {
-    staticClass: "fonts"
-  }, [_vm._v("字体： "), _c('span', [_c('pv-select', {
+  })], 1)]), _vm._v(" "), _c('a', [_vm._v("字体： "), _c('span', [_c('pv-select', {
     attrs: {
       "list": _vm.fonts
     },
     on: {
       "select": _vm.selectFont
     }
-  })], 1)])]), _vm._v(" "), _c('p', [(_vm.loading.save) ? [_c('a', [_vm._v("正在保存...")])] : [_c('a', {
+  })], 1)]), _vm._v(" "), _c('a', [_vm._v("字号： "), _c('span', [_c('pv-select', {
+    attrs: {
+      "list": _vm.sizes
+    },
+    on: {
+      "select": _vm.selectFontSize
+    }
+  })], 1)])]), _vm._v(" "), _c('p', {
+    staticClass: "is-right"
+  }, [(_vm.loading.save) ? [_c('a', [_vm._v("正在保存...")])] : [_c('a', {
     on: {
       "click": _vm.submit
     }
-  }, [_vm._m(3), _vm._v("保存")]), _vm._v(" "), _c('a', {
+  }, [_vm._m(0), _vm._v("保存")]), _vm._v(" "), _c('a', {
     on: {
       "click": _vm.create
     }
-  }, [_vm._m(4), _vm._v(" 新建")])]], 2)]), _vm._v(" "), _c('div', {
+  }, [_vm._m(1), _vm._v(" 新建")])]], 2)]), _vm._v(" "), _c('div', {
     staticClass: "is-message",
     class: {
       'is-success': _vm.message.type == 'success', 'is-error': _vm.message.type == 'error'
@@ -21836,18 +21842,6 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
   })])] : _vm._e()], 2)
 }
 var staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('span', [_c('i', {
-    staticClass: "iconfont iconzuoduiqi1"
-  })])
-},function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('span', [_c('i', {
-    staticClass: "iconfont iconjuzhong"
-  })])
-},function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('span', [_c('i', {
-    staticClass: "iconfont iconyouduiqicopy"
-  })])
-},function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('span', {
     staticStyle: {
       "font-size": "12px"

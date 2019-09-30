@@ -94,10 +94,6 @@ a {
   -ms-filter: none;
   filter: none;
 }
-@font-face {
-  font-family: '\542F\529F\5B57\4F53';
-  src: url("/public/statics/fonts/印品篆体.ttf");
-}
 @-moz-keyframes fadeIn {
 0% {
     opacity: 0;
@@ -987,7 +983,14 @@ a {
   background: #e9ecff;
 }
 .header-widget .header-widget-body div.customer .customer-user-drop ul li:not(.arrow) a[data-v-555dda73] {
+  width: 100%;
   color: inherit;
+  display: -webkit-inline-box;
+  display: -moz-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-box;
+  display: inline-flex;
 }
 
 .page-widget[data-v-8a8fb616] {
@@ -1054,6 +1057,7 @@ a {
   height: 100%;
   overflow: hidden;
   position: relative;
+  color: #222;
 }
 .poem-widget:hover .is-toptip[data-v-c7532566] {
   -webkit-transform: translateY(0px);
@@ -1155,7 +1159,43 @@ a {
   -ms-transition: 600ms;
   transition: 600ms;
 }
-.poem-widget .is-toptip p >a[data-v-c7532566] {
+.poem-widget .is-toptip p.is-left a[data-v-c7532566] {
+  display: -webkit-inline-box;
+  display: -moz-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-box;
+  display: inline-flex;
+  -webkit-box-align: center;
+  -moz-box-align: center;
+  -o-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -moz-box-pack: center;
+  -o-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  height: 24px;
+  cursor: pointer;
+  color: #d0d2d3;
+  margin-right: 5px;
+}
+.poem-widget .is-toptip p.is-left a span[data-v-c7532566] {
+  color: #444;
+  display: -webkit-inline-box;
+  display: -moz-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-box;
+  display: inline-flex;
+  width: 90px;
+  background: transparent;
+  border-radius: 3px;
+}
+.poem-widget .is-toptip p.is-right a[data-v-c7532566] {
   display: -webkit-inline-box;
   display: -moz-inline-box;
   display: -webkit-inline-flex;
@@ -1185,26 +1225,13 @@ a {
   -ms-transition: 300ms;
   transition: 300ms;
 }
-.poem-widget .is-toptip p >a[data-v-c7532566]:not(.fonts):hover,
-.poem-widget .is-toptip p >a.is-active[data-v-c7532566] {
+.poem-widget .is-toptip p.is-right a[data-v-c7532566]:hover {
   opacity: 0.6;
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=60)";
   filter: alpha(opacity=60);
 }
-.poem-widget .is-toptip p >a span[data-v-c7532566] {
+.poem-widget .is-toptip p.is-right a span[data-v-c7532566] {
   margin-right: 4px;
-}
-.poem-widget .is-toptip p >a.fonts span[data-v-c7532566] {
-  color: #444;
-  display: -webkit-inline-box;
-  display: -moz-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-box;
-  display: inline-flex;
-  width: 120px;
-  background: transparent;
-  border-radius: 3px;
 }
 .poem-widget .is-message[data-v-c7532566] {
   position: absolute;
@@ -1263,10 +1290,13 @@ a {
   display: none;
 }
 
-.poem-widget .select-arrow {
+.poem-widget .select-widget .select-arrow {
   right: 0px !important;
 }
-.poem-widget input {
+.poem-widget .select-widget a.select-panel span {
+  padding: 6px 10px;
+}
+.poem-widget .select-widget input {
   padding: 0px 10px;
   cursor: pointer;
 }
