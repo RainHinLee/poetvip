@@ -21418,15 +21418,12 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
-//
 
 
 var FONTS_STYLE = {
 	"default": { fontSize: "16px", color: "#444", fontFamily: "inherit" },
-	"繁杂体": { fontSize: "20px", color: "#222", fontFamily: "繁杂体" },
 	"槑萌体": { fontSize: "20px", color: "#222", fontFamily: "槑萌体" },
 	"下午茶体": { fontSize: "20px", color: "#222", fontFamily: "下午茶体" },
-	"意趣体": { fontSize: "20px", color: "#222", fontFamily: "意趣体" },
 	"篆体": { fontSize: "20px", color: "#222", fontFamily: "篆体" }
 };
 
@@ -21545,10 +21542,7 @@ exports.default = {
 
 	computed: {
 		fonts: function fonts() {
-			return [{ text: "默认", value: "default", file: "" }, { text: "下午茶体", value: "下午茶体", file: "/public/statics/fonts/下午茶.ttf" }, { text: "槑萌体", value: "槑萌体", file: "/public/statics/fonts/槑萌体.ttf" }, { text: "篆体", value: "篆体", file: "/public/statics/fonts/篆体.ttf"
-				// {text: "繁杂体", value:"繁杂体",  file: "/public/statics/fonts/繁杂体.ttf"},
-				// {text: "意趣体", value:"意趣体",  file: "/public/statics/fonts/意趣体.ttf"},
-			}];
+			return [{ text: "默认", value: "default", file: "" }, { text: "下午茶体", value: "下午茶体", file: "/public/statics/fonts/下午茶.ttf" }, { text: "槑萌体", value: "槑萌体", file: "/public/statics/fonts/槑萌体.ttf" }, { text: "篆体", value: "篆体", file: "/public/statics/fonts/篆体.ttf" }];
 		},
 		alignItems: function alignItems() {
 			return [{ text: "居中", value: "center" }, { text: "左对齐", value: "left" }, { text: "右对齐", value: "right" }];
@@ -21810,13 +21804,6 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     },
     on: {
       "select": _vm.selectFont
-    }
-  })], 1)]), _vm._v(" "), _c('a', [_vm._v("字号： "), _c('span', [_c('pv-select', {
-    attrs: {
-      "list": _vm.sizes
-    },
-    on: {
-      "select": _vm.selectFontSize
     }
   })], 1)])]), _vm._v(" "), _c('p', {
     staticClass: "is-right"
@@ -22937,7 +22924,7 @@ exports.default = {
 			poem: {
 				title: "再别康桥", //--标题
 				author_name: "徐志摩", //--作者名
-				appreciation: "", //--赏析
+				appreciation: ["《再别康桥》是现代诗人徐志摩脍炙人口的诗篇，是新月派诗歌的代表作品。全诗以离别康桥时感情起伏为线索，抒发了对康桥依依惜别的深情。语言轻盈柔和，形式精巧圆熟，诗人用虚实相间的手法，描绘了一幅幅流动的画面，构成了一处处美妙的意境，细致入微地将诗人对康桥的爱恋，对往昔生活的憧憬，对眼前的无可奈何的离愁，表现得真挚、浓郁、隽永，是徐志摩诗作中的绝唱。"], //--赏析
 				letter: "", //--背景图
 				body: ["轻轻的我走了，", "正如我轻轻的来；", "我轻轻的招手，", "作别西天的云彩。", "", "那河畔的金柳，", "是夕阳中的新娘；", "波光里的艳影，", "在我的心头荡漾。", "", "软泥上的青荇，", "油油的在水底招摇；", "在康桥的柔波里，", "我甘心做一条水草！", "", "那榆荫下的一潭，", "不是清泉，", "是天上虹 揉碎在浮藻间，", "沉淀着彩虹似的梦。", "", "寻梦？撑一支长蒿，", "向青草更青处漫溯，", "满载一船星辉，", "在星辉斑斓里放歌。", "", "但我不能放歌，", "悄悄是别离的笙箫；", "夏虫也为我沉默，", "沉默是今晚的康桥！", "", "悄悄的我走了，", "正如我悄悄的来；", "我挥一挥衣袖，", "不带走一片云彩。"],
 				style: {

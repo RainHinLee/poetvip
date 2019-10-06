@@ -52,8 +52,6 @@
 	import Create from "./create.vue";
 	import Rename from "./rename.vue";
 
-
-
 	export default {
 		components:{
 			"p-poetry-detail" : Detail,
@@ -84,7 +82,9 @@
 				this.loading.fetch = true
 				return api.poetry.getList().then(res=>{
 					this.list = res.data;
-					this.current = this.current._id ? this.current : this.list[0];
+					if(this.list.length){
+						this.current = this.current._id ? this.current : this.list[0];
+					}
 					this.loading.fetch = false;
 				}).catch(err=>{
 					this.$toast(`诗集数据获取失败：${err.message}`,'error');

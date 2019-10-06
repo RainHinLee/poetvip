@@ -21418,15 +21418,12 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
-//
 
 
 var FONTS_STYLE = {
 	"default": { fontSize: "16px", color: "#444", fontFamily: "inherit" },
-	"繁杂体": { fontSize: "20px", color: "#222", fontFamily: "繁杂体" },
 	"槑萌体": { fontSize: "20px", color: "#222", fontFamily: "槑萌体" },
 	"下午茶体": { fontSize: "20px", color: "#222", fontFamily: "下午茶体" },
-	"意趣体": { fontSize: "20px", color: "#222", fontFamily: "意趣体" },
 	"篆体": { fontSize: "20px", color: "#222", fontFamily: "篆体" }
 };
 
@@ -21545,10 +21542,7 @@ exports.default = {
 
 	computed: {
 		fonts: function fonts() {
-			return [{ text: "默认", value: "default", file: "" }, { text: "下午茶体", value: "下午茶体", file: "/public/statics/fonts/下午茶.ttf" }, { text: "槑萌体", value: "槑萌体", file: "/public/statics/fonts/槑萌体.ttf" }, { text: "篆体", value: "篆体", file: "/public/statics/fonts/篆体.ttf"
-				// {text: "繁杂体", value:"繁杂体",  file: "/public/statics/fonts/繁杂体.ttf"},
-				// {text: "意趣体", value:"意趣体",  file: "/public/statics/fonts/意趣体.ttf"},
-			}];
+			return [{ text: "默认", value: "default", file: "" }, { text: "下午茶体", value: "下午茶体", file: "/public/statics/fonts/下午茶.ttf" }, { text: "槑萌体", value: "槑萌体", file: "/public/statics/fonts/槑萌体.ttf" }, { text: "篆体", value: "篆体", file: "/public/statics/fonts/篆体.ttf" }];
 		},
 		alignItems: function alignItems() {
 			return [{ text: "居中", value: "center" }, { text: "左对齐", value: "left" }, { text: "右对齐", value: "right" }];
@@ -21810,13 +21804,6 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     },
     on: {
       "select": _vm.selectFont
-    }
-  })], 1)]), _vm._v(" "), _c('a', [_vm._v("字号： "), _c('span', [_c('pv-select', {
-    attrs: {
-      "list": _vm.sizes
-    },
-    on: {
-      "select": _vm.selectFontSize
     }
   })], 1)])]), _vm._v(" "), _c('p', {
     staticClass: "is-right"
@@ -23087,7 +23074,9 @@ exports.default = {
 			this.loading.fetch = true;
 			return _api2.default.poetry.getList().then(function (res) {
 				_this.list = res.data;
-				_this.current = _this.current._id ? _this.current : _this.list[0];
+				if (_this.list.length) {
+					_this.current = _this.current._id ? _this.current : _this.list[0];
+				}
 				_this.loading.fetch = false;
 			}).catch(function (err) {
 				_this.$toast("\u8BD7\u96C6\u6570\u636E\u83B7\u53D6\u5931\u8D25\uFF1A" + err.message, 'error');

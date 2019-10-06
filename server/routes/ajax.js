@@ -46,9 +46,8 @@ module.exports = {
 		var data= {pen_name: username,phone,password,type};
 
 		UserCode.isFresh(code_id,code,phone).then(doc=>{
-			return new Customer(data).save().select("-password");
-		}).then(doc=>{
-			console.log(doc)
+			return new Customer(data).save()
+		}).then(doc=>doc.select("-password")).then(doc=>{
 			if(doc && doc._id){
 				session.create(res,doc._id);
 				delete doc._doc.password;
@@ -57,6 +56,7 @@ module.exports = {
 				return Promise.reject({message:"注册失败"});
 			}
 		}).catch(err=>{
+			console.log(err.message)
 			res.status(300);
 			res.send({text: err.message})
 		});

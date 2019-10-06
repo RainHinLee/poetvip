@@ -1069,9 +1069,10 @@ a {
 .poem-widget .is-box[data-v-c7532566] {
   position: relative;
   z-index: 2;
+  background: rgba(255,255,255,0.7);
 }
 .poem-widget .is-body[data-v-c7532566] {
-  padding: 50px 50px;
+  padding: 80px 50px;
 }
 .poem-widget .is-body >h3[data-v-c7532566] {
   font-size: 20px;

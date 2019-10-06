@@ -42,7 +42,6 @@
 					</div>
 					<footer><pv-editor placeholder="此处输入赏析"  :initText="poem.appreciation" @change="changeAppreciation"></pv-editor></footer>				
 				</template>
-
 			</div>
 		</pv-scroll>
 
@@ -52,7 +51,7 @@
 				<p class="is-left">
 					<a>对齐：<span> <pv-select :list="alignItems" @select="setAlign"/>	</span></a>
 					<a>字体： <span> <pv-select :list="fonts" @select="selectFont"/>	</span></a>
-					<a>字号： <span> <pv-select :list="sizes" @select="selectFontSize"/>	</span></a>
+					<!-- <a>字号： <span> <pv-select :list="sizes" @select="selectFontSize"/>	</span></a> -->
 				</p>
 				<p class="is-right">
 					<template v-if="loading.save">
@@ -85,10 +84,8 @@ import api from "api";
 
 const FONTS_STYLE = {
 	"default": { fontSize: "16px", color: "#444", fontFamily:"inherit"},
-	"繁杂体": { fontSize: "20px", color: "#222", fontFamily:"繁杂体"},
 	"槑萌体": {fontSize: "20px", color: "#222", fontFamily:"槑萌体"},
 	"下午茶体": {fontSize: "20px", color: "#222", fontFamily:"下午茶体"},
-	"意趣体": {fontSize: "20px", color: "#222", fontFamily:"意趣体"},
 	"篆体": {fontSize: "20px", color: "#222", fontFamily:"篆体"},	
 }
 
@@ -204,9 +201,7 @@ export default {
 				{text: "默认", value:"default", file:""},
 				{text: "下午茶体", value:"下午茶体", file: "/public/statics/fonts/下午茶.ttf"},
 				{text: "槑萌体", value:"槑萌体", file: "/public/statics/fonts/槑萌体.ttf"},
-				{text: "篆体", value:"篆体", file: "/public/statics/fonts/篆体.ttf"}
-				// {text: "繁杂体", value:"繁杂体",  file: "/public/statics/fonts/繁杂体.ttf"},
-				// {text: "意趣体", value:"意趣体",  file: "/public/statics/fonts/意趣体.ttf"},
+				{text: "篆体", value:"篆体", file: "/public/statics/fonts/篆体.ttf"},
 			]
 		},
 
@@ -244,8 +239,9 @@ export default {
 	.is-box
 		position relative
 		z-index 2
+		background rgba(255,255,255,0.7)
 	.is-body
-		padding 50px 50px
+		padding 80px 50px
 		>h3
 			font-size 20px
 			text-align center
