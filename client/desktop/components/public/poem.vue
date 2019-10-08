@@ -205,8 +205,6 @@ export default {
 				{text: "下午茶体", value:"下午茶体", file: "/public/statics/fonts/下午茶.ttf"},
 				{text: "槑萌体", value:"槑萌体", file: "/public/statics/fonts/槑萌体.ttf"},
 				{text: "篆体", value:"篆体", file: "/public/statics/fonts/篆体.ttf"}
-				// {text: "繁杂体", value:"繁杂体",  file: "/public/statics/fonts/繁杂体.ttf"},
-				// {text: "意趣体", value:"意趣体",  file: "/public/statics/fonts/意趣体.ttf"},
 			]
 		},
 
