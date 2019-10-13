@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>登录</title>
+	<link rel="stylesheet" type="text/css" href="{{{alifont}}}">
+	<link rel="stylesheet" type="text/css" href="/desktop/dist/login.css">
+	<script type="text/javascript">
+		window.customer = {{{JSON.stringify(user)}}}
+		window.useragent = {{{JSON.stringify(useragent)}}}
+		window.query = {{{JSON.stringify(query)}}}
+	</script>
+</head>
+<body>
+	<div id="app"></div>
+	<!--vue-ssr-outlet-->
+</body>
+</html>
+<script src="/public/statics/js/polyfill.js"></script>
+<script src="/desktop/dist/vendor.js"></script>
+<script src="/desktop/dist/login.js"></script>

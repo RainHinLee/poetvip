@@ -25,7 +25,7 @@
 							<a class="is-btn is-success" href="/price">升级</a>
 						</p>
 						<div class="customer-user-drop">
-							<a><img src="https://froont.com/rainhinlee/-avatar"></a>
+							<a><img></a>
 							<span><i class="iconfont iconsanjiaoxia"></i></span>
 							<ul>
 								<li class="arrow"><span><i class="iconfont iconsanjiaoshang"></i></span></li>
@@ -59,14 +59,12 @@
 
 	const Home_Drop_Links = [
 		{title:"我的诗集", link:"/account#/poetry"},
-		{title:"我的诗歌", link:"/account#/poem"},
 		{title:"写作台", link:"/worker"},
 		{title:"退出", link:"/user/logout"},
 	];
 
 	const Account_Drop_Links= [
 		{title:"我的诗集", link:"/account#/poetry"},
-		{title:"我的诗歌", link:"/account#/poem"},
 		{title:"写作台", link:"/worker"},
 		{title:"退出", link:"/user/logout"},
 	]

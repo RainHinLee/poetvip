@@ -12,17 +12,17 @@
 					<div class="is-btn-box">
 						<p>
 							<button class="is-btn" @click="showLayer('create')"> 
-								<span><i class="iconfont iconadd-o"></i></span> 新建诗集
+								<span><i class="iconfont iconadd-o"></i></span>新建诗集
 							</button>
 						</p>
 						<p>
-							<a class="is-btn" href="/worker" target="_blank"><span><i class="iconfont iconadd-o"></i></span> 我要写诗</a>
+							<a class="is-btn" href="/worker"><span><i class="iconfont iconadd-o"></i></span> 我要写诗</a>
 						</p>
 					</div>
 					<!-- 诗集列表 -->
 					<ul>
 						<template v-for="item of list">
-							<li :class="{'is-active' : current._id == item._id}" @click="select(item)">
+							<li :class="{'is-active' : poetry._id == item._id}" @click="select(item)">
 								<h4>{{item.name}} <small>（ {{item.size}} ）</small></h4>
 							</li>
 						</template>
@@ -31,16 +31,15 @@
 			</section>
 			<!-- 诗集详情 -->
 			<section class="is-right">
-				<template v-if="current._id">
-					<p-poetry-detail :data="current" @rename="showLayer('rename')"/>
+				<template v-if="poetry._id">
+					<poetry-detail :data="poetry" @rename="showLayer('rename')"/>
 				</template>
 			</section>
 		</template>
 
 		<!-- 创建诗集浮层 -->
 		<pv-layer :title="layer.title" width="460px" :open="layer.open" @close="layer.open=false">
-			<p-poetry-create v-if="layer.type=='create'" @close="layer.open=false" @create:success="fetch"/>
-			<p-poetry-rename v-if="layer.type=='rename'" @close="layer.open=false" /> 
+			<poetry-rename v-if="layer.type=='rename'" @close="layer.open=false" /> 
 		</pv-layer>	
 	</div>
 </template>
@@ -52,13 +51,11 @@
 	import Create from "./create.vue";
 	import Rename from "./rename.vue";
 
-
-
 	export default {
 		components:{
-			"p-poetry-detail" : Detail,
-			"p-poetry-create" : Create,
-			"p-poetry-rename" : Rename,
+			"poetry-detail" : Detail,
+			"poetry-create" : Create,
+			"poetry-rename" : Rename,
 
 		},
 		data(){
@@ -72,28 +69,32 @@
 					open: false,
 					title: "新建诗集",
 				},
-
-				list: [],
-				current: {}
+				poetry_id: ""
 			}
 		},
 
-
 		methods:{
 			fetch(){  //---获取诗歌集
-				this.loading.fetch = true
-				return api.poetry.getList().then(res=>{
-					this.list = res.data;
-					this.current = this.current._id ? this.current : this.list[0];
+				this.loading.fetch = true;
+				return this.fetchHandler().then(res=>{
 					this.loading.fetch = false;
 				}).catch(err=>{
-					this.$toast(`诗集数据获取失败：${err.message}`,'error');
+					this.$toast(`诗集获取失败：${err.message}`,'error');
 					this.loading.fetch = false;
 				})
 			},
 
-			refresh(){ //---更新
-
+			fetchHandler(){
+				return api.poetry.getList(this.$store).then(res=>{
+					let arr = res.data || {};
+					this.$nextTick(()=>{
+						if(arr.length){
+							this.poetry_id = this.poetry_id || arr[0]._id
+						}else{
+							this.poetry_id = "";
+						}
+					})
+				})
 			},
 
 			showLayer(type){  //---选择诗集
@@ -116,12 +117,28 @@
 			},
 
 			select(poetry){
-				this.current = poetry
+				this.poetry_id = poetry._id;
 			},
+		},
+
+		computed:{
+			list(){
+				return this.$store.state.poetries || [];
+			},
+
+			poetry(){
+				return this.list.find(item=>item._id == this.poetry_id) || {};
+			}
 		},
 
 		activated(){
 			this.fetch();
+		},
+
+		mounted(){
+			//---监听worker页面诗歌的更新和新建；
+			this.$onMessage("poem:saved",this.fetchHandler.bind(this));
+			this.$onMessage("poetry:created",this.fetchHandler.bind(this));  //--worker页面，创建了新的诗集
 		}
 	}
 

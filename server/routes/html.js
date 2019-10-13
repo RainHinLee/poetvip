@@ -4,6 +4,7 @@ const util = require("./util.js");
 const session = require("./session.js");
 const fs = require("fs-extra");
 const path = require("path");
+const Poem = require("../models/poem.js");
 
 module.exports = {
 	home(req,res){
@@ -33,13 +34,22 @@ module.exports = {
 		let letters = fs.readdirSync(letterFile).map(item=>{
 			return `/public/statics/images/letters/${item}`;
 		});
-		let target = encodeURIComponent(req.originalUrl);
+		
+		if(!req.user._id){ //--未登录
+			let target = encodeURIComponent(req.originalUrl);
+			return res.redirect(`/user/login?target=${target}`);			
+		};
 
-		if(req.user._id){
-			util.render(req,res,"worker.html",{letters})
-		}else{
-			res.redirect(`/user/login?target=${target}`);
-		}
+		let poem_id = req.query.poem;
+		let promise = poem_id ? Poem.findById(poem_id) : Promise.resolve({});
+
+		promise.then(doc=>{
+			return doc ? doc : Promise.reject({message:"诗歌不存在"})
+		}).then(doc=>{
+			util.render(req,res,"worker.html",{letters,poem:doc});
+		}).catch(err=>{
+			util.render(req,res,"worker.html",{letters,poem:{}});
+		})
 	},
 
 	logout(req,res){

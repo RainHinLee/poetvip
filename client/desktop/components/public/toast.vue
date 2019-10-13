@@ -33,7 +33,7 @@
 		},
 
 		mounted(){
-			setTimeout(this.close.bind(this),3000);
+			this.timer= setTimeout(this.close.bind(this),3000);
 		},
 
 		destroyed(){

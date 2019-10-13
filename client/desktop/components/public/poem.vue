@@ -42,7 +42,6 @@
 					</div>
 					<footer><pv-editor placeholder="此处输入赏析"  :initText="poem.appreciation" @change="changeAppreciation"></pv-editor></footer>				
 				</template>
-
 			</div>
 		</pv-scroll>
 
@@ -50,9 +49,9 @@
 			<!-- 工具按钮 -->
 			<div class="is-toptip">
 				<p class="is-left">
-					<a>对齐：<span> <pv-select :list="alignItems" @select="setAlign"/>	</span></a>
-					<a>字体： <span> <pv-select :list="fonts" @select="selectFont"/>	</span></a>
-					<a>字号： <span> <pv-select :list="sizes" @select="selectFontSize"/>	</span></a>
+					<a>对齐：<span> <pv-select :list="alignItems" :initVal="poem.style.textAlign" @select="setAlign"/>	</span></a>
+					<a>字体： <span> <pv-select :list="fonts" :initVal="poem.fontName" @select="selectFont"/>	</span></a>
+					<!-- <a>字号： <span> <pv-select :list="sizes" @select="selectFontSize"/>	</span></a> -->
 				</p>
 				<p class="is-right">
 					<template v-if="loading.save">
@@ -81,16 +80,6 @@
 
 import util from "util";
 import api from "api";
-
-
-const FONTS_STYLE = {
-	"default": { fontSize: "16px", color: "#444", fontFamily:"inherit"},
-	"繁杂体": { fontSize: "20px", color: "#222", fontFamily:"繁杂体"},
-	"槑萌体": {fontSize: "20px", color: "#222", fontFamily:"槑萌体"},
-	"下午茶体": {fontSize: "20px", color: "#222", fontFamily:"下午茶体"},
-	"意趣体": {fontSize: "20px", color: "#222", fontFamily:"意趣体"},
-	"篆体": {fontSize: "20px", color: "#222", fontFamily:"篆体"},	
-}
 
 export default {
 	props:{
@@ -126,10 +115,13 @@ export default {
 
 			this.loading.save = true;
 			promise.then(res=>{
+				res.style.fontFamily = this.poem.style.fontFamily;  //--存储时，字体将被替换为"";
 				Object.assign(this.poem,res);  //--成功
+
 				this.loading.save = false;
 				this.showMesasge('保存成功！','success');
 				this.$emit("poem:saved",res);  //---诗歌保存成功
+				this.$postMessage("poem:saved",res._id);  //---发送页面间通知
 			}).catch(err=>{
 				this.loading.save = false;
 				this.showMesasge(`保存失败：${err.message};请重试`,'error');
@@ -137,9 +129,7 @@ export default {
 		},
 
 		create(){ //---创建新的
-			this.$confirm("确定创建新诗歌？",()=>{
-				this.$emit("poem:create")
-			});
+			window.$confirm("确定创建新诗歌？",()=>this.$emit("poem:create"));
 		},
  
 		changeBody(arr){  //---诗歌正文
@@ -148,45 +138,38 @@ export default {
 
 		changeAppreciation(arr){ //--诗歌评价
 			this.poem.appreciation= arr
-			console.log(this.poem.appreciation)
 		},
 
 		validate(){
 			let {title,author_name,body,poetry} = this.poem;
 			if(title.length==0){
-				this.$toast("诗歌标题未输入",'error');
+				window.$toast("诗歌标题未输入",'error');
 				return false
 			}
 
 			if(author_name.length==0){
-				this.$toast("诗歌作者未输入",'error');
+				window.$toast("诗歌作者未输入",'error');
 				return false
 			}
 			if(body.length==0){
-				this.$toast("诗歌正文未输入",'error');
+				window.$toast("诗歌正文未输入",'error');
 				return false
 			}
 			if(!poetry){
-				this.$toast("请选择一个诗集",'error');
+				window.$toast("请选择一个诗集",'error');
 				return false
 			};
 			return true;
 		},
 
 		selectFont(data){  //---选择字体
-			let name = data.value || "default";
-			let style = FONTS_STYLE[data.value];
-			Object.assign(this.poem.style,style);
-			data.file && util.loadFont(name, data.file);
+			this.poem.fontName = data.value || "";
+			this.loadFont(this.poem.fontName);
 		},
 
 		setAlign(data){
 			this.poem.style.textAlign = data.value;
 		},
-
-		selectFontSize(data){
-
-		},		
 
 		showMesasge(message,type){
 			Object.assign(this.message,{text: message,type});
@@ -196,15 +179,29 @@ export default {
 				this.message.type="";
 			},3000);
 		},
+
+		loadFont(name){  //--加载字体文件,edit和show状态通用
+			let fontConf= this.fonts.find(item=>item.value==name);  //---字体配置文件
+			if(!fontConf) return;
+			Object.assign(this.poem.style,{
+				fontSize: fontConf.fontSize,
+				color: fontConf.color,
+				fontFamily: name || "inherit"
+			})
+
+			let file = this.type=="edit" ? fontConf.file : this.poem.fontFile;
+			file && util.loadFont(name,file);
+		}
 	},
 
 	computed:{
 		fonts(){
 			return [
-				{text: "默认", value:"default", file:""},
-				{text: "下午茶体", value:"下午茶体", file: "/public/statics/fonts/下午茶.ttf"},
-				{text: "槑萌体", value:"槑萌体", file: "/public/statics/fonts/槑萌体.ttf"},
-				{text: "篆体", value:"篆体", file: "/public/statics/fonts/篆体.ttf"}
+				{text: "默认", value:"", fontSize: "16px", color: "#444", file:""},
+				{text: "下午茶", value:"下午茶", fontSize: "20px", color: "#222", file: "/public/statics/fonts/下午茶.ttf"},
+				{text: "槑萌体", value:"槑萌体", fontSize: "20px", color: "#222", file: "/public/statics/fonts/槑萌体.ttf"},
+				{text: "篆体", value:"篆体", fontSize: "20px", color: "#222", file: "/public/statics/fonts/篆体.ttf"},
+				// {text: "繁杂体", value:"繁杂体", fontSize: "20px", color: "#222", file: "/public/statics/fonts/繁杂体.ttf"},
 			]
 		},
 
@@ -223,7 +220,6 @@ export default {
 				{text: "大",value:"big"},
 			]			
 		}
-
 	},
 }
 
@@ -242,8 +238,9 @@ export default {
 	.is-box
 		position relative
 		z-index 2
+		background rgba(255,255,255,0.3)
 	.is-body
-		padding 50px 50px
+		padding 80px 50px
 		>h3
 			font-size 20px
 			text-align center

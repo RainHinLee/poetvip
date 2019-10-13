@@ -56,9 +56,34 @@ Vue.mixin({ //---注入
 			  	cancel : cancel|| function(){}
 			  }
 			}).show()
+		},
+
+		$onMessage(type,handler){  //---监听页面间通信,
+			if(window.localStorage && type){
+				window.addEventListener('storage',(ev)=>{
+					if(ev.key=="message"){
+						let message = JSON.parse(ev.newValue);   //---转为json对象
+						message.type==type && handler && handler(message.data);
+					}
+				})
+			}
+		},
+
+		$postMessage(type,data=""){  //--页面间，发送通知 type类型， data值
+			let message = {type,data};
+			if(window.localStorage && type){
+				window.localStorage.setItem("message", JSON.stringify("{type:''}"));  //--先清空,防止同样的数据不产生message事件
+				window.localStorage.setItem("message", JSON.stringify(message));
+			}
 		}
 	}
 });
+
+window.dispatcher = new Vue();
+window.$toast = window.dispatcher.$toast;
+window.$confirm = window.dispatcher.$confirm;
+window.$alert = window.dispatcher.$alert;
+
 
 export default function (App,options={}){  //---渲染函数
 	let {routes=[],store={}} = options;

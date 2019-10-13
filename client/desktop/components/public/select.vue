@@ -2,8 +2,9 @@
 	
 	props:
 		placehodler
+		value: "",  初始值
 		list:
-			{text: "", value:""}
+			[{text: "", value:""}]
  -->
 
 <template>
@@ -36,6 +37,11 @@
 			list:{
 				type: Array,
 				default: ()=>[]
+			},
+
+			initVal:{
+				type: [String,Number],
+				default: ""
 			}
 		},
 
@@ -59,11 +65,17 @@
 				handler(newVal,oldVal){
 					this.$emit("select",newVal,oldVal)
 				}
+			},
+
+			"initVal":{
+				handler(){
+					this.selected = this.list.find(item=>item.value==this.initVal) || this.list[0] || {};
+				},
 			}
 		},
 
 		mounted(){
-			this.selected = this.list[0];
+			this.selected = this.list.find(item=>item.value==this.initVal) || this.list[0] || {};
 			window.addEventListener("click",()=>{
 				this.showed = false;
 			});

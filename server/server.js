@@ -16,6 +16,7 @@ app.use(compression()); //--资源压缩
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json())// req.body
 app.use(express.static("platform")); //---静态文件
+app.use('/fonts', express.static("fonts"))  //---字体文件
 
 app.use((req,res,next)=>{  //---session查询
 	routes.session.query(req).then(()=>next()).catch(err=>next())
@@ -33,14 +34,21 @@ app.get("/worker",routes.html.worker);
 // app.get("/privacy",routes.html.privacy);  //---隐私申明
 
 // //---ajax请求
-app.post("/user/login",routes.ajax.login); //--注册
+app.post("/user/login",routes.ajax.login); //--登录
 app.post("/user/register",routes.ajax.register); //--注册
-app.post("/user/getCode",routes.ajax.code); //--注册
+app.post("/user/getCode",routes.ajax.code); //--获取验证码
 app.post("/user/find/phone",routes.ajax.findByPhone);  //---手机查找用户，检测手机号是否注册
+//---诗歌操作
 app.post("/poem/add", routes.ajax.poem.add);  //---增加诗歌
 app.post("/poem/update", routes.ajax.poem.update);  //---更新诗歌
-app.post("/poetry/list", routes.ajax.poetry.getList);  //---回去诗歌集列表
-app.post("/poetry/create", routes.ajax.poetry.create);  //---新建诗歌集
+app.post("/poem/delete", routes.ajax.poem.delete); //---删除诗歌
+
+//--诗集操作
+app.post("/poetry/list", routes.ajax.poetry.getList);  //---诗歌集列表
+app.post("/poetry/create", routes.ajax.poetry.create);  //---新建诗集
+app.post("/poetry/poems",routes.ajax.poetry.poems);  //--诗集中的诗歌列表
+app.post("/poetry/translate",routes.ajax.poetry.translate);  //--诗集中的诗歌列表
+
 
 
 

@@ -45,7 +45,7 @@
 		},
 
 		mounted(){
-			// this.$toast("增加新的",'success')
+
 		}
 	}
 

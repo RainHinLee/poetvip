@@ -55,7 +55,7 @@
 		li
 			width 47%
 			margin-bottom 15px
-			height 150px
+			height auto
 			overflow hidden
 			position relative
 			cursor pointer

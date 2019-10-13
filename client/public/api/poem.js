@@ -6,21 +6,19 @@ const store = {
 	add(data){  //---创建诗歌
 		let url = "/poem/add";
 		let time = Date.now();
-		return axios.post(url,data).then(res=>store.timeout(res,time))
+		return axios.post(url,data).then(res=>store.timeout(res,time));
 	},
 
 	update(data){ //--更新诗歌
 		let url = "/poem/update";
 		let time = Date.now();
-		return axios.post(url,data).then(res=>store.timeout(res,time))
+		return axios.post(url,data).then(res=>store.timeout(res,time));
 	},
 
-	delete(){  //--删除诗歌
-
-	},
-
-	get(){  //--取得诗歌
-
+	delete(poem_id){  //--删除诗歌
+		let url = "/poem/delete";
+		let time = Date.now();
+		return axios.post(url,{id: poem_id}).then(res=>store.timeout(res,time));
 	},
 
 	timeout(res,stime){

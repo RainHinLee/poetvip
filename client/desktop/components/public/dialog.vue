@@ -37,11 +37,12 @@
 		},
 		methods:{
 			cancel(){
-				this.$emit('cancel')
-				this.remove()
+				this.$emit('cancel');
+				this.remove();
 			},
 			confirm(){
 				this.$emit('confirm');
+				this.remove();
 			},
 		}
 	}

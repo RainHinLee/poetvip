@@ -1,6 +1,5 @@
 <template>
 	<div class="worker-poetry-widget">
-
 		<template v-if="loading.fetch">
 			<section class="is-empty"><pv-loading /></section>
 		</template>
@@ -9,7 +8,7 @@
 			<pv-scroll :bar="false">
 				<!-- 新建按钮 -->
 				<div class="is-btn-box">
-					<button class="is-btn" @click="create"><span><i class="iconfont iconadd-o"></i></span> 新建诗集</button>
+					<button class="is-btn" @click="layer.open=true"><span><i class="iconfont iconadd-o"></i></span> 新建诗集</button>
 				</div>
 				<!-- 诗集列表 -->
 				<ul>
@@ -21,6 +20,11 @@
 				</ul>
 			</pv-scroll>
 		</template>
+
+		<!-- 创建诗集 -->
+		<pv-layer title="新建诗集" width="460px" :open="layer.open" @close="layer.open=false">
+			<p-poetry-create @create:success="createSuccess"  @close="layer.open=false" />
+		</pv-layer>	
 	</div>
 </template>
 
@@ -28,22 +32,24 @@
 	
 	import api from "api";
 	import config from "./config.js";
+	import CreatePoetry from "../account/poetry/create.vue";
 
 	export default {
+		components:{
+			"p-poetry-create" : CreatePoetry
+		},
 		data(){
 			return {
 				loading:{
 					fetch: false
 				},
-
+				list: [],
+				current: {},
 				layer:{
 					open: false,
-				},
-				list: [],
-				current: {}
+				}
 			}
 		},
-
 
 		methods:{
 			fetch(){  //---获取诗歌集
@@ -51,7 +57,9 @@
 				return api.poetry.getList().then(res=>{
 					this.list = res.data;
 					if(this.list.length){
-						this.current = this.current._id ? this.current : this.list[0];
+						let index = this.list.findIndex(item=>item._id == window.poem.poetry);  //---更新下的诗歌所属诗集
+						index = index<=0 ? 0 : index;
+						this.current = this.current._id ? this.current : this.list[index];
 					}
 					this.loading.fetch = false;
 				}).catch(err=>{
@@ -60,8 +68,9 @@
 				})
 			},
 
-			create(){ //---新建诗集
-				config.dispatcher.$emit("poetry:create");
+			createSuccess(){  //--诗集创建成功
+				this.fetch();
+				this.$postMessage("poetry:created");  //---通知account页面有新的诗集被创建；
 			},
 		},
 
@@ -73,7 +82,7 @@
 
 		mounted(){
 			this.fetch();
-			config.dispatcher.$on("poetry:refresh", this.fetch.bind(this))
+			config.dispatcher.$on("poetry:refresh", this.fetch.bind(this));
 		}
 	}
 

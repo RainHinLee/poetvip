@@ -6,19 +6,17 @@
 			<p-tabs :data="tabs" @select="tab"></p-tabs>
 		</div>
 		<div class="tabs-panel">
-			<template v-if="type=='poetry'">
-				<p-poetry/>
-			</template>
+			<p-poetry v-if="type=='poetry'" />
 		</div>		
 	</div>
 </template>
 
 <script>
 	
+	import api from "api";
 	import config from "./config.js";
 	import Tabs from "../public/tab.vue";
 	import Poetry from "./poetry.vue";
-	import api from "api";
 
 	export default {
 		components:{

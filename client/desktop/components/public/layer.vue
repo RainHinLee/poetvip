@@ -5,14 +5,15 @@
 			title: 显示标题
 			width : 宽度
 			height : 高度
+			overhide : layer-content 设置溢出隐藏
 		events:
 			close: 关闭事件
 -->
 <template>
 	<div class="layer" :class="{'is-active':open}">
-	  <div class="layer-content" :style="{width:width,height:height}" >
+	  <div class="layer-content" :style="{width:width,height:height, overflow: overhide ? 'hidden' : 'visible'}" >
 		  <header>
-		  	<h6>{{title}}</h6>
+		  	<h6 v-html="title"></h6>
 		  	<p @click="close"><i class='iconfont iconclose-o'></i></p>
 		  </header>
 		  <section class="layer-body">
@@ -44,6 +45,11 @@
 				type: String,
 				default: ''
 			},
+
+			overhide:{
+				type: Boolean,
+				default: true
+			}
 		},
 
 		methods:{
@@ -93,6 +99,8 @@
 			p
 				transition 600ms
 				cursor pointer
+				min-width 20px
+				min-height 20px
 				.iconfont
 					font-size 20px
 				&:hover
