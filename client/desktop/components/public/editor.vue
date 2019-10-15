@@ -45,15 +45,12 @@
 			encode(){  //--将textera中的空格换为span标签，换行符换为单行"",
 				let rex = /\s/g;
 				let arr = this.text.split(/[\r\n]/gi);
-				let res = arr.map(item=>item.replace(rex,"<span></span>"));
 				return arr	
 			},
 
 			decode(){ //--将文本中的span标签转换为textera中的换行符和空格符
 				let text = Array.isArray(this.initText) ? this.initText.join("\r") : this.initText;
-				let rex = /<span><\/span>/gi
-				let res = text.replace(rex," ");
-				return res;
+				return text;
 			},
 
 			makeExpandingArea(){ //--js计算textera 高度
@@ -102,6 +99,7 @@
 	color inherit
 	letter-sapce inherit
 	textarea
+		white-space pre-wrap
 		height auto
 		resize none
 		border none		

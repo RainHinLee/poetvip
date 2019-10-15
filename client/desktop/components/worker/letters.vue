@@ -42,7 +42,6 @@
 				config.dispatcher.$emit("letter:select",letter)
 			}
 		},
-
 	}
 
 </script>
@@ -51,15 +50,17 @@
 	ul
 		display flex
 		flex-wrap wrap
-		justify-content space-between
+		justify-content space-around
 		li
-			width 47%
+			width 150px
+			margin-right 15px
 			margin-bottom 15px
-			height auto
+			height 212px
 			overflow hidden
 			position relative
 			cursor pointer
 			background #fff
+			line-height 1.0
 			&.is-active
 				.layer
 					display none
@@ -78,7 +79,6 @@
 				display flex
 				align-items center
 				justify-content center
-				
 				&:hover
 					button 
 						display block

@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 268);
+/******/ 	return __webpack_require__(__webpack_require__.s = 274);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -22595,13 +22595,19 @@ if (false) {
 /* 265 */,
 /* 266 */,
 /* 267 */,
-/* 268 */
+/* 268 */,
+/* 269 */,
+/* 270 */,
+/* 271 */,
+/* 272 */,
+/* 273 */,
+/* 274 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _App = __webpack_require__(269);
+var _App = __webpack_require__(275);
 
 var _App2 = _interopRequireDefault(_App);
 
@@ -22614,19 +22620,19 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 (0, _main2.default)(_App2.default);
 
 /***/ }),
-/* 269 */
+/* 275 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_App_vue__ = __webpack_require__(272);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_App_vue__ = __webpack_require__(278);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_App_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_App_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_5a0c93db_node_modules_vue_loader_lib_selector_type_template_index_0_App_vue__ = __webpack_require__(273);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_01b46765_node_modules_vue_loader_lib_selector_type_template_index_0_App_vue__ = __webpack_require__(280);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(270)
-  __webpack_require__(271)
+  __webpack_require__(276)
+  __webpack_require__(277)
 }
 var normalizeComponent = __webpack_require__(1)
 /* script */
@@ -22636,17 +22642,17 @@ var normalizeComponent = __webpack_require__(1)
 /* styles */
 var __vue_styles__ = injectStyle
 /* scopeId */
-var __vue_scopeId__ = "data-v-5a0c93db"
+var __vue_scopeId__ = "data-v-01b46765"
 /* moduleIdentifier (server only) */
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
   __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_App_vue___default.a,
-  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_5a0c93db_node_modules_vue_loader_lib_selector_type_template_index_0_App_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_01b46765_node_modules_vue_loader_lib_selector_type_template_index_0_App_vue__["a" /* default */],
   __vue_styles__,
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "desktop\\components\\login\\App.vue"
+Component.options.__file = "desktop\\components\\reader\\App.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] App.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -22657,9 +22663,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-5a0c93db", Component.options)
+    hotAPI.createRecord("data-v-01b46765", Component.options)
   } else {
-    hotAPI.reload("data-v-5a0c93db", Component.options)
+    hotAPI.reload("data-v-01b46765", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -22670,19 +22676,19 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 270 */
+/* 276 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
-/* 271 */
+/* 277 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
-/* 272 */
+/* 278 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22692,422 +22698,212 @@ Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 
-var _util = __webpack_require__(89);
-
-var _util2 = _interopRequireDefault(_util);
-
 var _api = __webpack_require__(50);
 
 var _api2 = _interopRequireDefault(_api);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
 exports.default = {
 	data: function data() {
+		var poems = window.poetry.poems || [];
+		var index = window.query.poem ? poems.findIndex(function (item) {
+			return item._id == window.query.poem;
+		}) : 0;
+
 		return {
-			type: "password",
-			phone: {
-				value: "",
-				error: false,
-				text: ""
-			},
-
-			password: {
-				value: "",
-				error: false,
-				text: ""
-			},
-
-			code: {
-				value: "",
-				error: false,
-				text: "",
-				id: "",
-				time: "0"
-			},
-
-			loading: {
-				login: false
-			}
+			poetry: poetry,
+			index: index,
+			poems: this.getPoems(index),
+			swipType: ""
 		};
 	},
 
 
 	methods: {
-		submit: function submit() {
-			var _this = this;
+		getPoems: function getPoems(index) {
+			//--当前序号
+			var poems = window.poetry.poems || [];
+			var start = Number(index) - 1;
+			var end = Number(index) + 1;
 
-			//---提交
-			if (!this.isValid || this.loading.login) return;
-			var data = this.getValues();
-			this.loading.login = true;
-			_api2.default.customer.login(data).then(function (result) {
-				var url = window.query.target || "/account"; //--注册成功后的网址
-				document.location.href = url;
-			}).catch(function (err) {
-				_this.loading.login = false;
-				_this.$toast(err.message);
+			var res = this.poems || poems.map(function (item) {
+				return null;
+			}); //---当前已有的数据
+
+			[start, index, end].forEach(function (item) {
+				res[item] = res[item] || poems[item] || null;
 			});
-		},
-		getCode: function getCode() {
-			var _this2 = this;
 
-			if (this.code.time > 0) return;
-			if (this.phone.value && !this.phone.error) {
-				//--手机值存在，没有错误
-				_api2.default.customer.getCode(this.phone.value).then(function (res) {
-					Object.assign(_this2.code, {
-						id: res._id,
-						time: "60"
-					});
-					_this2.startTime();
-				}).catch(function (err) {
-					_this2.$toast(err.message);
-				});
-			} else {
-				this.phone.error || this.blur("phone"); //---错误不存在，则执行校验手机号
-			}
+			return res;
 		},
-		getValues: function getValues() {
-			if (this.type == "password") {
-				return {
-					phone: this.phone.value,
-					password: this.password.value
-				};
-			} else {
-				return {
-					phone: this.phone.value,
-					code: this.code.value,
-					code_id: this.code.id
-				};
-			}
+		prev: function prev() {
+			if (this.index == 0) return;
+			this.index--;
 		},
-		blur: function blur(key) {
-			var _util$patterns = _util2.default.patterns,
-			    isPhone = _util$patterns.isPhone,
-			    isPassword = _util$patterns.isPassword,
-			    isCode = _util$patterns.isCode;
-
-			if (this.isEmpty(key)) return; //--空回去
-
-			switch (key) {
-				case "password":
-					//--密码
-					var data = isPassword(this.password.value) ? { error: false, text: "" } : { error: true, text: "密码格式不正确" };
-					Object.assign(this.password, data);
-					break;
-				case "phone":
-					//--手机
-					if (isPhone(this.phone.value)) {
-						//--手机格式正确
-						Object.assign(this.phone, { error: false, text: "" });
-					} else {
-						Object.assign(this.phone, { error: true, text: "手机号不正确" });
-					}
-					break;
-				case "code":
-					if (this.code.id) {
-						var data = isCode(this.code.value) ? { error: false, text: "" } : { error: true, text: "验证码不正确" };
-						Object.assign(this.code, data);
-					} else {
-						Object.assign(this.code, { error: true, text: "验证码未获取" });
-					}
-					break;
-			}
-		},
-		isEmpty: function isEmpty(key) {
-			//--检验是否为空
-			var data = this[key] || {};
-			var TEXTS = {
-				"phone": "请输入手机号",
-				"code": "请输入验证码",
-				"password": "请输入密码"
-			};
-
-			if (data.value.length == 0) {
-				data.error = true;
-				data.text = TEXTS[key];
-			} else {
-				data.error = false;
-				data.text = "";
-			};
-			return data.error;
-		},
-		startTime: function startTime() {
-			//---code倒计时
-			this.timer = setInterval(function () {
-				if (this.code.time == 0) {
-					this.stopTime();
-				} else {
-					this.code.time--;
-				}
-			}.bind(this), 1000);
-		},
-		stopTime: function stopTime() {
-			clearInterval(this.timer);
-			this.timer = null;
+		next: function next() {
+			if (this.index == poetry.poems.length - 1) return;
+			this.index++;
 		}
 	},
 
-	computed: {
-		isValid: function isValid() {
-			var _this3 = this;
-
-			var keys = this.type == "password" ? ['phone', 'password'] : ['phone', 'code'];
-			var isok = true;
-			keys.forEach(function (key) {
-				var data = _this3[key];
-				if (data.error || !data.value) {
-					//--错误存在或者值不存在
-					isok = false;
-				}
-			});
-			return isok;
+	watch: {
+		index: function index() {
+			this.poems = this.getPoems(this.index);
 		}
 	}
-};
+
+}; //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /***/ }),
-/* 273 */
+/* 279 */,
+/* 280 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
-    staticClass: "regieter-app"
-  }, [_c('pv-page', {
-    staticClass: "page1"
-  }, [_c('header', [_c('h1', {
-    staticClass: "logo"
+    staticClass: "reader-app"
+  }, [_c('section', {
+    staticClass: "is-left"
+  }, [_vm._v("左")]), _vm._v(" "), _c('section', {
+    staticClass: "is-center"
+  }, [_c('article', [_c('ul', {
+    style: ({
+      'margin-left': -640 * _vm.index + 'px',
+      'width': _vm.poems.length * 640 + 'px'
+    })
+  }, [(_vm.poems.length) ? _vm._l((_vm.poems), function(poem) {
+    return _c('li', [(poem) ? _c('pv-poem', {
+      key: poem._id,
+      attrs: {
+        "type": "show",
+        "poem": poem
+      },
+      on: {
+        "update:poem": function($event) {
+          poem = $event
+        }
+      }
+    }) : _vm._e()], 1)
+  }) : _vm._e()], 2)])]), _vm._v(" "), _c('section', {
+    staticClass: "is-right"
+  }, [_c('ul', [_vm._m(0), _vm._v(" "), _vm._m(1), _vm._v(" "), _vm._m(2), _vm._v(" "), _c('li', {
+    staticClass: "prev",
+    class: {
+      'is-disabled': _vm.index == 0
+    },
+    attrs: {
+      "data-desc": "上一篇"
+    },
+    on: {
+      "click": _vm.prev
+    }
   }, [_c('a', {
-    attrs: {
-      "href": "/"
-    }
-  }, [_vm._v("悦诗阁")])]), _vm._v(" "), _c('p', [_c('a', {
-    attrs: {
-      "href": "/user/register"
-    }
-  }, [_vm._v("注册")])])])]), _vm._v(" "), _c('pv-page', {
-    staticClass: "page2"
-  }, [_c('article', {
-    staticClass: "is-body"
-  }, [_c('section', [_c('h3', [_vm._v("登录")]), _vm._v(" "), _c('p', {
-    staticClass: "typebox"
-  }, [_c('a', [_c('span', {
+    staticClass: "iconfont iconzuo"
+  })]), _vm._v(" "), _c('li', {
+    staticClass: "next",
     class: {
-      'is-active': _vm.type == 'password'
+      'is-disabled': _vm.index == _vm.poems.length - 1
     },
-    on: {
-      "click": function($event) {
-        _vm.type = 'password'
-      }
-    }
-  }, [_vm._v("密码登录")])]), _vm._v(" "), _c('a', [_c('span', {
-    class: {
-      'is-active': _vm.type == 'phone'
-    },
-    on: {
-      "click": function($event) {
-        _vm.type = 'phone'
-      }
-    }
-  }, [_vm._v("短信登录")])])]), _vm._v(" "), _c('ul', [_c('li', [_c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model.trim",
-      value: (_vm.phone.value),
-      expression: "phone.value",
-      modifiers: {
-        "trim": true
-      }
-    }],
     attrs: {
-      "placeholder": "手机号"
-    },
-    domProps: {
-      "value": (_vm.phone.value)
+      "data-desc": "下一篇"
     },
     on: {
-      "blur": [function($event) {
-        return _vm.blur('phone')
-      }, function($event) {
-        return _vm.$forceUpdate()
-      }],
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.$set(_vm.phone, "value", $event.target.value.trim())
-      }
+      "click": _vm.next
     }
-  }), _vm._v(" "), _c('a', {
-    class: {
-      'is-active': _vm.phone.error
-    }
-  }, [_vm._v("\n\t\t\t\t\t\t\t" + _vm._s(_vm.phone.text) + " "), _c('i', {
-    staticClass: "iconfont icongantanhao-yuankuang"
-  })])]), _vm._v(" "), (_vm.type == 'phone') ? _c('li', {
-    staticStyle: {
-      "padding-top": "5px"
-    }
-  }, [_c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model.trim",
-      value: (_vm.code.value),
-      expression: "code.value",
-      modifiers: {
-        "trim": true
-      }
-    }],
-    attrs: {
-      "placeholder": "请输入手机验证码"
-    },
-    domProps: {
-      "value": (_vm.code.value)
-    },
-    on: {
-      "blur": [function($event) {
-        return _vm.blur('code')
-      }, function($event) {
-        return _vm.$forceUpdate()
-      }],
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.$set(_vm.code, "value", $event.target.value.trim())
-      }
-    }
-  }), _vm._v(" "), _c('a', {
-    class: {
-      'is-active': _vm.code.error
-    },
-    staticStyle: {
-      "top": "-13px"
-    }
-  }, [_vm._v("\n\t\t\t\t\t\t\t" + _vm._s(_vm.code.text) + " "), _c('i', {
-    staticClass: "iconfont icongantanhao-yuankuang"
-  })]), _vm._v(" "), _c('p', {
-    staticClass: "send_code",
-    on: {
-      "click": _vm.getCode
-    }
-  }, [(_vm.code.time > 0) ? [_vm._v(_vm._s(_vm.code.time) + "s")] : [_vm._v("发送验证码")]], 2)]) : _vm._e(), _vm._v(" "), (_vm.type == 'password') ? _c('li', [_c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model.trim",
-      value: (_vm.password.value),
-      expression: "password.value",
-      modifiers: {
-        "trim": true
-      }
-    }],
-    attrs: {
-      "placeholder": "密码（英文或数字，不少于6位"
-    },
-    domProps: {
-      "value": (_vm.password.value)
-    },
-    on: {
-      "blur": [function($event) {
-        return _vm.blur('password')
-      }, function($event) {
-        return _vm.$forceUpdate()
-      }],
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.$set(_vm.password, "value", $event.target.value.trim())
-      }
-    }
-  }), _vm._v(" "), _c('a', {
-    class: {
-      'is-active': _vm.password.error
-    }
-  }, [_vm._v("\n\t\t\t\t\t\t\t" + _vm._s(_vm.password.text) + " "), _c('i', {
-    staticClass: "iconfont icongantanhao-yuankuang"
-  })])]) : _vm._e()]), _vm._v(" "), _c('div', {
-    staticClass: "btnbox"
   }, [_c('a', {
-    class: {
-      'is-disabled': !_vm.isValid
-    },
-    on: {
-      "click": _vm.submit
-    }
-  }, [_vm._v("\n\t\t\t\t\t\t" + _vm._s(_vm.loading.login ? "正在登录......" : "登录") + "\n\t\t\t\t\t")])]), _vm._v(" "), _c('p', {
-    staticClass: "hasbox"
-  }, [_c('a', {
-    attrs: {
-      "href": "/user/register"
-    }
-  }, [_vm._v("账号注册")]), _vm._v(" "), _c('a', {
-    attrs: {
-      "href": "/user/forget-password"
-    }
-  }, [_vm._v("忘记密码?")])])])])])], 1)
+    staticClass: "iconfont iconyou"
+  })]), _vm._v(" "), _vm._m(3), _vm._v(" "), _vm._m(4), _vm._v(" "), _vm._m(5)])])])
 }
-var staticRenderFns = []
+var staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('li', {
+    attrs: {
+      "data-desc": "目录"
+    }
+  }, [_c('a', {
+    staticClass: "iconfont icongengduo1"
+  })])
+},function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('li', {
+    attrs: {
+      "data-desc": "分享"
+    }
+  }, [_c('a', {
+    staticClass: "iconfont iconfenxiang"
+  })])
+},function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('li', {
+    attrs: {
+      "data-desc": "收录(200)"
+    }
+  }, [_c('a', {
+    staticClass: "iconfont iconshoulu"
+  })])
+},function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('li', {
+    attrs: {
+      "data-desc": "阅读量(1000)"
+    }
+  }, [_c('a', {
+    staticClass: "iconfont iconyueduliang"
+  })])
+},function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('li', {
+    attrs: {
+      "data-desc": "点赞(2000)"
+    }
+  }, [_c('a', {
+    staticClass: "iconfont iconzan"
+  })])
+},function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('li', {
+    attrs: {
+      "data-desc": "移动端观看"
+    }
+  }, [_c('a', {
+    staticClass: "iconfont iconyidongduan"
+  })])
+}]
 render._withStripped = true
 /* harmony default export */ __webpack_exports__["a"] = ({ render: render, staticRenderFns: staticRenderFns });
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-5a0c93db", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-01b46765", module.exports)
   }
 }
 

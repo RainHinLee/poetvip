@@ -21,7 +21,7 @@
 
 <template>
 	<div class="poem-widget">
-		<pv-scroll class="is-box">
+		<pv-scroll class="is-box" :bar="type=='edit'">
 			<div class="is-body">
 				<!-- 展示状态 -->
 				<template v-if="type=='show'">
@@ -30,7 +30,9 @@
 					<ul :style="poem.style">
 						<li v-for="item of poem.body">{{item}}</li>
 					</ul>
-					<footer>{{poem.appreciation}}</footer>			
+					<footer>
+						<p v-for="item of poem.appreciation">{{item}}</p>
+					</footer>
 				</template>
 
 				<!-- 编辑和新建状态 -->
@@ -137,6 +139,7 @@ export default {
 		},
 
 		changeAppreciation(arr){ //--诗歌评价
+			console.log(arr);
 			this.poem.appreciation= arr
 		},
 
@@ -182,15 +185,17 @@ export default {
 
 		loadFont(name){  //--加载字体文件,edit和show状态通用
 			let fontConf= this.fonts.find(item=>item.value==name);  //---字体配置文件
+			let fontName = this.type=="show" ? `${name}-${this.poem._id}` : name; //--字体名字
+
 			if(!fontConf) return;
 			Object.assign(this.poem.style,{
 				fontSize: fontConf.fontSize,
 				color: fontConf.color,
-				fontFamily: name || "inherit"
-			})
-
+				fontFamily: fontName || "inherit"
+			});
 			let file = this.type=="edit" ? fontConf.file : this.poem.fontFile;
-			file && util.loadFont(name,file);
+
+			file && util.loadFont(fontName,file);
 		}
 	},
 
@@ -219,6 +224,12 @@ export default {
 				{text: "中",value:"normal"},
 				{text: "大",value:"big"},
 			]			
+		}
+	},
+
+	mounted(){  //---show类型下，需要加载字体文件
+		if(this.type=="show" && this.poem.fontName){
+			this.loadFont(this.poem.fontName)
 		}
 	},
 }
@@ -258,10 +269,14 @@ export default {
 			text-align center
 			li
 				min-height 15px
+				white-space pre-wrap
 		>footer
 			margin-top 30px
 			text-align left
 			color #666
+			white-space pre-wrap
+			>p
+				min-height 10px
 		input
 			font-size inherit
 			color inherit

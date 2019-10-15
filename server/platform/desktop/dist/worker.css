@@ -524,6 +524,7 @@
   letter-sapce: inherit;
 }
 .editor-widget textarea[data-v-fa8aad5a] {
+  white-space: pre-wrap;
   height: auto;
   resize: none;
   border: none;
@@ -583,11 +584,16 @@
 .poem-widget .is-body >div li[data-v-c7532566],
 .poem-widget .is-body >ul li[data-v-c7532566] {
   min-height: 15px;
+  white-space: pre-wrap;
 }
 .poem-widget .is-body >footer[data-v-c7532566] {
   margin-top: 30px;
   text-align: left;
   color: #666;
+  white-space: pre-wrap;
+}
+.poem-widget .is-body >footer >p[data-v-c7532566] {
+  min-height: 10px;
 }
 .poem-widget .is-body input[data-v-c7532566] {
   font-size: inherit;
@@ -1688,21 +1694,23 @@ ul[data-v-4b84d6a8] {
   -webkit-flex-wrap: wrap;
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
-  -webkit-box-pack: justify;
-  -moz-box-pack: justify;
-  -o-box-pack: justify;
-  -ms-flex-pack: justify;
-  -webkit-justify-content: space-between;
-  justify-content: space-between;
+  -webkit-box-pack: distribute;
+  -moz-box-pack: distribute;
+  -o-box-pack: distribute;
+  -ms-flex-pack: distribute;
+  -webkit-justify-content: space-around;
+  justify-content: space-around;
 }
 ul li[data-v-4b84d6a8] {
-  width: 47%;
+  width: 150px;
+  margin-right: 15px;
   margin-bottom: 15px;
-  height: auto;
+  height: 212px;
   overflow: hidden;
   position: relative;
   cursor: pointer;
   background: #fff;
+  line-height: 1;
 }
 ul li.is-active .layer[data-v-4b84d6a8] {
   display: none;

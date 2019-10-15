@@ -5,6 +5,7 @@ const session = require("./session.js");
 const fs = require("fs-extra");
 const path = require("path");
 const Poem = require("../models/poem.js");
+const Poetry = require("../models/poetry.js");
 
 module.exports = {
 	home(req,res){
@@ -49,6 +50,24 @@ module.exports = {
 			util.render(req,res,"worker.html",{letters,poem:doc});
 		}).catch(err=>{
 			util.render(req,res,"worker.html",{letters,poem:{}});
+		})
+	},
+
+	reader(req,res){  //--阅读器
+		let {poetry} = req.query;
+		let promise = poetry ? Poetry.findById(poetry).populate({path: "poems"}) : Promise.reject({message:"缺少参数"});
+
+		promise.then(doc=>{
+			if(!doc){
+				return Promise.reject({message:"诗集不存在"});
+			}else{
+				util.render(req,res,"reader.html",{
+					title: doc.name,  //--seo
+					poetry: doc,
+				});
+			} 
+		}).catch(err=>{
+			res.send(err.message)
 		})
 	},
 

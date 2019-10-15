@@ -29,7 +29,7 @@ app.get("/user/logout",routes.html.logout);  //----登录
 app.get("/account",routes.html.account); //---账户中心
 app.get("/user/login",routes.html.login);  //----登录
 app.get("/worker",routes.html.worker);
-// app.get("/reader",routes.html.reader);  //----阅读器
+app.get("/reader",routes.html.reader);  //----阅读器
 // app.get("/copyright",routes.html.copyright);  //---版权申明
 // app.get("/privacy",routes.html.privacy);  //---隐私申明
 

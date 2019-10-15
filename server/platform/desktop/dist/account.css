@@ -1036,6 +1036,7 @@ a {
   letter-sapce: inherit;
 }
 .editor-widget textarea[data-v-fa8aad5a] {
+  white-space: pre-wrap;
   height: auto;
   resize: none;
   border: none;
@@ -1095,11 +1096,16 @@ a {
 .poem-widget .is-body >div li[data-v-c7532566],
 .poem-widget .is-body >ul li[data-v-c7532566] {
   min-height: 15px;
+  white-space: pre-wrap;
 }
 .poem-widget .is-body >footer[data-v-c7532566] {
   margin-top: 30px;
   text-align: left;
   color: #666;
+  white-space: pre-wrap;
+}
+.poem-widget .is-body >footer >p[data-v-c7532566] {
+  min-height: 10px;
 }
 .poem-widget .is-body input[data-v-c7532566] {
   font-size: inherit;

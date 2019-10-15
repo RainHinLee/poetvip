@@ -3,7 +3,7 @@ const fs = require('fs-extra');
 const path = require("path");
 const Vue = require("Vue");
 const createRenderer = require("vue-server-renderer").createRenderer;
-const alifont = "//at.alicdn.com/t/font_1256709_7qm7bihs08t.css";
+const alifont = "//at.alicdn.com/t/font_1256709_rwttinft11s.css";
 
 const FontMin = require("fontmin");
 
