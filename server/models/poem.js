@@ -40,7 +40,7 @@ PoemSchema.statics.updateFontFile= function (poem_id){  //---创建和更新字�
 		return new Promise((resolve,reject)=>{
 			fontmin.run((err,files)=>err ? reject(err) : resolve(`/fonts/${poem_id}.ttf`));
 		}).then(src=>{
-			return doc.updateOne({fontFile: src}).then(()=>this.findById(poem_id));
+			return doc.updateOne({fontFile: `${src}?${Date.now()}`}).then(()=>this.findById(poem_id));
 		})
 	})
 };

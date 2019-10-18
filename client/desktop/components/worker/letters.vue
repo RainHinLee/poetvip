@@ -50,7 +50,7 @@
 	ul
 		display flex
 		flex-wrap wrap
-		justify-content space-around
+		justify-content flex-start
 		li
 			width 150px
 			margin-right 15px

@@ -3,15 +3,13 @@
 	<div class="reader-app">
 		<section class="is-left">左</section>
 		<section class="is-center">
-			<article>
-				<ul :style="{'margin-left': -640*index+'px', 'width': poems.length*640+'px'}">
-					<template v-if="poems.length">
-						<li v-for="poem of poems">
-							<pv-poem type="show" :poem.sync="poem" :key="poem._id" v-if="poem"/>
-						</li>	
-					</template>
-				</ul>
-			</article>
+			<ul :style="{'margin-left': -640*index+'px', 'width': poems.length*640+'px'}">
+				<template v-if="poems.length">
+					<li v-for="poem of poems">
+						<pv-poem type="show" :poem.sync="poem" :key="poem._id" v-if="poem"/>
+					</li>	
+				</template>
+			</ul>
 		</section>
 		<section class="is-right">
 			<ul>
@@ -54,12 +52,19 @@
 				let start= Number(index)-1;
 				let end = Number(index)+1;
 
+				if(start<=0){
+					start =0;
+				}
+
+				if(end>=poems.length-1){
+					end = poems.length-1;
+				}
+
 				let res = this.poems || poems.map(item=>null);  //---当前已有的数据
 
 				[start,index,end].forEach(item=>{
 					res[item] = res[item] || (poems[item] || null);
-				})
-
+				});
 				return res;
 			},
 
@@ -71,6 +76,8 @@
 			next(){
 				if(this.index==poetry.poems.length-1) return;
 				this.index++
+
+				console.log(this.index, this.poems.length)
 			},
 
 		},
@@ -78,6 +85,7 @@
 		watch:{
 			index(){
 				this.poems = this.getPoems(this.index);
+				
 			}
 		}
 
@@ -112,7 +120,7 @@
 			margin-left 0px
 			li
 				height 100%
-				width 640px
+				flex 1
 	section.is-right
 		padding 15px
 		ul
@@ -153,7 +161,7 @@
 						background #797a80
 						color #fff
 					&.is-disabled
-						opacity 0.7
+						opacity 0.3
 						cursor not-allowed
 						&:hover
 							background #bcbdc0

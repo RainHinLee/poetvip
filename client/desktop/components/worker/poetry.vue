@@ -13,7 +13,7 @@
 				<!-- 诗集列表 -->
 				<ul>
 					<template v-for="item of list">
-						<li :class="{'is-active' : current._id == item._id}" @click="current=item">
+						<li :class="{'is-active' : current._id == item._id}" @click="select(item)">
 							<h4>{{item.name}} <small>（ {{item.size}} ）</small></h4>
 						</li>
 					</template>
@@ -56,14 +56,13 @@
 				this.loading.fetch = true
 				return api.poetry.getList().then(res=>{
 					this.list = res.data;
-					if(this.list.length){
-						let index = this.list.findIndex(item=>item._id == window.poem.poetry);  //---更新下的诗歌所属诗集
-						index = index<=0 ? 0 : index;
-						this.current = this.current._id ? this.current : this.list[index];
-					}
 					this.loading.fetch = false;
+					if(!this.current._id){
+						this.current = this.list.find(item=>item._id==window.poem.poetry) || {};
+					}
 				}).catch(err=>{
 					this.$toast(`诗集数据获取失败：${err.message}`,'error');
+
 					this.loading.fetch = false;
 				})
 			},
@@ -72,11 +71,10 @@
 				this.fetch();
 				this.$postMessage("poetry:created");  //---通知account页面有新的诗集被创建；
 			},
-		},
 
-		watch:{
-			current(newVal){
-				config.dispatcher.$emit("poetry:select",newVal);
+			select(item){
+				this.current = item;
+				config.dispatcher.$emit("poetry:select",this.current);
 			}
 		},
 

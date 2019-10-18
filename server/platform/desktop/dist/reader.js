@@ -21573,7 +21573,37 @@ exports.default = {
 
 	computed: {
 		fonts: function fonts() {
-			return [{ text: "默认", value: "", fontSize: "16px", color: "#444", file: "" }, { text: "下午茶", value: "下午茶", fontSize: "20px", color: "#222", file: "/public/statics/fonts/下午茶.ttf" }, { text: "槑萌体", value: "槑萌体", fontSize: "20px", color: "#222", file: "/public/statics/fonts/槑萌体.ttf" }, { text: "篆体", value: "篆体", fontSize: "20px", color: "#222", file: "/public/statics/fonts/篆体.ttf" }];
+			return [{
+				text: "默认",
+				value: "",
+				fontSize: "17px",
+				color: "#666",
+				file: ""
+			}, {
+				text: "锐劲体",
+				value: "锐劲体",
+				fontSize: "18px",
+				color: "#222",
+				file: "/public/statics/fonts/锐劲体.ttf"
+			}, {
+				text: "细圆体",
+				value: "细圆体",
+				fontSize: "18px",
+				color: "#444",
+				file: "/public/statics/fonts/细圆体.ttf"
+			}, {
+				text: "槑萌体",
+				value: "槑萌体",
+				fontSize: "20px",
+				color: "#444",
+				file: "/public/statics/fonts/槑萌体.ttf"
+			}, {
+				text: "手写体",
+				value: "手写体",
+				fontSize: "20px",
+				color: "#444",
+				file: "/public/statics/fonts/手写体.ttf"
+			}];
 		},
 		alignItems: function alignItems() {
 			return [{ text: "居中", value: "center" }, { text: "左对齐", value: "left" }, { text: "右对齐", value: "right" }];
@@ -21864,7 +21894,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     }
   })], 1), _vm._v(" "), _c('footer', [_c('pv-editor', {
     attrs: {
-      "placeholder": "此处输入赏析",
+      "placeholder": "此处输入赏析或附记",
       "initText": _vm.poem.appreciation
     },
     on: {
@@ -22627,7 +22657,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_App_vue__ = __webpack_require__(278);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_App_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_App_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_01b46765_node_modules_vue_loader_lib_selector_type_template_index_0_App_vue__ = __webpack_require__(280);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_01b46765_node_modules_vue_loader_lib_selector_type_template_index_0_App_vue__ = __webpack_require__(279);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
@@ -22727,6 +22757,14 @@ exports.default = {
 			var start = Number(index) - 1;
 			var end = Number(index) + 1;
 
+			if (start <= 0) {
+				start = 0;
+			}
+
+			if (end >= poems.length - 1) {
+				end = poems.length - 1;
+			}
+
 			var res = this.poems || poems.map(function (item) {
 				return null;
 			}); //---当前已有的数据
@@ -22734,7 +22772,6 @@ exports.default = {
 			[start, index, end].forEach(function (item) {
 				res[item] = res[item] || poems[item] || null;
 			});
-
 			return res;
 		},
 		prev: function prev() {
@@ -22744,6 +22781,8 @@ exports.default = {
 		next: function next() {
 			if (this.index == poetry.poems.length - 1) return;
 			this.index++;
+
+			console.log(this.index, this.poems.length);
 		}
 	},
 
@@ -22785,12 +22824,9 @@ exports.default = {
 //
 //
 //
-//
-//
 
 /***/ }),
-/* 279 */,
-/* 280 */
+/* 279 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -22801,7 +22837,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     staticClass: "is-left"
   }, [_vm._v("左")]), _vm._v(" "), _c('section', {
     staticClass: "is-center"
-  }, [_c('article', [_c('ul', {
+  }, [_c('ul', {
     style: ({
       'margin-left': -640 * _vm.index + 'px',
       'width': _vm.poems.length * 640 + 'px'
@@ -22819,7 +22855,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
         }
       }
     }) : _vm._e()], 1)
-  }) : _vm._e()], 2)])]), _vm._v(" "), _c('section', {
+  }) : _vm._e()], 2)]), _vm._v(" "), _c('section', {
     staticClass: "is-right"
   }, [_c('ul', [_vm._m(0), _vm._v(" "), _vm._m(1), _vm._v(" "), _vm._m(2), _vm._v(" "), _c('li', {
     staticClass: "prev",

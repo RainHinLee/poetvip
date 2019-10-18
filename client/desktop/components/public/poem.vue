@@ -42,7 +42,7 @@
 					<div :style="poem.style">
 						<pv-editor placeholder="此处输入诗歌正文" :initText="poem.body" @change="changeBody"></pv-editor>
 					</div>
-					<footer><pv-editor placeholder="此处输入赏析"  :initText="poem.appreciation" @change="changeAppreciation"></pv-editor></footer>				
+					<footer><pv-editor placeholder="此处输入赏析或附记"  :initText="poem.appreciation" @change="changeAppreciation"></pv-editor></footer>				
 				</template>
 			</div>
 		</pv-scroll>
@@ -53,7 +53,7 @@
 				<p class="is-left">
 					<a>对齐：<span> <pv-select :list="alignItems" :initVal="poem.style.textAlign" @select="setAlign"/>	</span></a>
 					<a>字体： <span> <pv-select :list="fonts" :initVal="poem.fontName" @select="selectFont"/>	</span></a>
-					<!-- <a>字号： <span> <pv-select :list="sizes" @select="selectFontSize"/>	</span></a> -->
+					<!-- <a>字号： <span> <pv-select :list="sizes"  @select="selectFontSize"/>	</span></a> -->
 				</p>
 				<p class="is-right">
 					<template v-if="loading.save">
@@ -202,11 +202,41 @@ export default {
 	computed:{
 		fonts(){
 			return [
-				{text: "默认", value:"", fontSize: "16px", color: "#444", file:""},
-				{text: "下午茶", value:"下午茶", fontSize: "20px", color: "#222", file: "/public/statics/fonts/下午茶.ttf"},
-				{text: "槑萌体", value:"槑萌体", fontSize: "20px", color: "#222", file: "/public/statics/fonts/槑萌体.ttf"},
-				{text: "篆体", value:"篆体", fontSize: "20px", color: "#222", file: "/public/statics/fonts/篆体.ttf"},
-				// {text: "繁杂体", value:"繁杂体", fontSize: "20px", color: "#222", file: "/public/statics/fonts/繁杂体.ttf"},
+				{
+					text: "默认", 
+					value:"", 
+					fontSize: "17px", 
+					color: "#666", 
+					file:""
+				},
+				{
+					text: "锐劲体", 
+					value:"锐劲体", 
+					fontSize: "18px", 
+					color: "#222", 
+					file:"/public/statics/fonts/锐劲体.ttf"
+				},
+				{
+					text: "细圆体", 
+					value:"细圆体", 
+					fontSize: "18px", 
+					color: "#444", 
+					file:"/public/statics/fonts/细圆体.ttf"
+				},
+				{
+					text: "槑萌体", 
+					value:"槑萌体", 
+					fontSize: "20px", 
+					color: "#444", 
+					file:"/public/statics/fonts/槑萌体.ttf"
+				},
+				{
+					text: "手写体", 
+					value:"手写体", 
+					fontSize: "20px", 
+					color: "#444", 
+					file:"/public/statics/fonts/手写体.ttf"
+				},
 			]
 		},
 

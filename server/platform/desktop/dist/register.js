@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 281);
+/******/ 	return __webpack_require__(__webpack_require__.s = 280);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -21573,7 +21573,37 @@ exports.default = {
 
 	computed: {
 		fonts: function fonts() {
-			return [{ text: "默认", value: "", fontSize: "16px", color: "#444", file: "" }, { text: "下午茶", value: "下午茶", fontSize: "20px", color: "#222", file: "/public/statics/fonts/下午茶.ttf" }, { text: "槑萌体", value: "槑萌体", fontSize: "20px", color: "#222", file: "/public/statics/fonts/槑萌体.ttf" }, { text: "篆体", value: "篆体", fontSize: "20px", color: "#222", file: "/public/statics/fonts/篆体.ttf" }];
+			return [{
+				text: "默认",
+				value: "",
+				fontSize: "17px",
+				color: "#666",
+				file: ""
+			}, {
+				text: "锐劲体",
+				value: "锐劲体",
+				fontSize: "18px",
+				color: "#222",
+				file: "/public/statics/fonts/锐劲体.ttf"
+			}, {
+				text: "细圆体",
+				value: "细圆体",
+				fontSize: "18px",
+				color: "#444",
+				file: "/public/statics/fonts/细圆体.ttf"
+			}, {
+				text: "槑萌体",
+				value: "槑萌体",
+				fontSize: "20px",
+				color: "#444",
+				file: "/public/statics/fonts/槑萌体.ttf"
+			}, {
+				text: "手写体",
+				value: "手写体",
+				fontSize: "20px",
+				color: "#444",
+				file: "/public/statics/fonts/手写体.ttf"
+			}];
 		},
 		alignItems: function alignItems() {
 			return [{ text: "居中", value: "center" }, { text: "左对齐", value: "left" }, { text: "右对齐", value: "right" }];
@@ -21864,7 +21894,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     }
   })], 1), _vm._v(" "), _c('footer', [_c('pv-editor', {
     attrs: {
-      "placeholder": "此处输入赏析",
+      "placeholder": "此处输入赏析或附记",
       "initText": _vm.poem.appreciation
     },
     on: {
@@ -22607,14 +22637,13 @@ if (false) {
 /* 277 */,
 /* 278 */,
 /* 279 */,
-/* 280 */,
-/* 281 */
+/* 280 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _App = __webpack_require__(282);
+var _App = __webpack_require__(281);
 
 var _App2 = _interopRequireDefault(_App);
 
@@ -22627,19 +22656,19 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 (0, _main2.default)(_App2.default);
 
 /***/ }),
-/* 282 */
+/* 281 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_App_vue__ = __webpack_require__(285);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_App_vue__ = __webpack_require__(284);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_App_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_App_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_31cb9745_node_modules_vue_loader_lib_selector_type_template_index_0_App_vue__ = __webpack_require__(286);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_31cb9745_node_modules_vue_loader_lib_selector_type_template_index_0_App_vue__ = __webpack_require__(285);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
+  __webpack_require__(282)
   __webpack_require__(283)
-  __webpack_require__(284)
 }
 var normalizeComponent = __webpack_require__(1)
 /* script */
@@ -22683,6 +22712,12 @@ if (false) {(function () {
 
 
 /***/ }),
+/* 282 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
 /* 283 */
 /***/ (function(module, exports) {
 
@@ -22690,12 +22725,6 @@ if (false) {(function () {
 
 /***/ }),
 /* 284 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 285 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22955,7 +22984,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 286 */
+/* 285 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

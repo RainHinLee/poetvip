@@ -1490,7 +1490,13 @@ a {
 }
 .reader-app section.is-center ul li[data-v-01b46765] {
   height: 100%;
-  width: 640px;
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  -o-box-flex: 1;
+  box-flex: 1;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
 }
 .reader-app section.is-right[data-v-01b46765] {
   padding: 15px;
@@ -1576,9 +1582,9 @@ a {
 }
 .reader-app section.is-right ul li.next.is-disabled[data-v-01b46765],
 .reader-app section.is-right ul li.prev.is-disabled[data-v-01b46765] {
-  opacity: 0.7;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=70)";
-  filter: alpha(opacity=70);
+  opacity: 0.3;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=30)";
+  filter: alpha(opacity=30);
   cursor: not-allowed;
 }
 .reader-app section.is-right ul li.next.is-disabled[data-v-01b46765]:hover,
