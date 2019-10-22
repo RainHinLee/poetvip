@@ -210,13 +210,6 @@ export default {
 					file:""
 				},
 				{
-					text: "锐劲体", 
-					value:"锐劲体", 
-					fontSize: "18px", 
-					color: "#222", 
-					file:"/public/statics/fonts/锐劲体.ttf"
-				},
-				{
 					text: "细圆体", 
 					value:"细圆体", 
 					fontSize: "18px", 
@@ -224,16 +217,9 @@ export default {
 					file:"/public/statics/fonts/细圆体.ttf"
 				},
 				{
-					text: "槑萌体", 
-					value:"槑萌体", 
-					fontSize: "20px", 
-					color: "#444", 
-					file:"/public/statics/fonts/槑萌体.ttf"
-				},
-				{
 					text: "手写体", 
 					value:"手写体", 
-					fontSize: "20px", 
+					fontSize: "19px", 
 					color: "#444", 
 					file:"/public/statics/fonts/手写体.ttf"
 				},
@@ -258,7 +244,7 @@ export default {
 	},
 
 	mounted(){  //---show类型下，需要加载字体文件
-		if(this.type=="show" && this.poem.fontName){
+		if(this.type=="show"){
 			this.loadFont(this.poem.fontName)
 		}
 	},

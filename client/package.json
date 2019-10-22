@@ -9,6 +9,7 @@
     "babel-preset-stage-3": "6.24.1",
     "copy-webpack-plugin": "4.2.3",
     "css-loader": "0.28.7",
+    "cube-ui": "^1.12.32",
     "extract-text-webpack-plugin": "3.0.2",
     "file-loader": "^4.1.0",
     "nib": "^1.1.2",

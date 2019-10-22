@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>{{{title}}}</title>
+	<meta name="viewport" id='viewport' content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, 
+				user-scalable=no">	
+
+	<script type="text/javascript">
+		window.customer = {{{JSON.stringify(user)}}};
+		window.useragent = {{{JSON.stringify(useragent)}}};
+		window.query = {{{JSON.stringify(query)}}};
+		window.poetry = {{{JSON.stringify(poetry)}}};
+
+		//---适配
+		(function (){
+			var ispaid = window.useragent.isiPad;
+			var viewport = document.querySelector('#viewport');
+			var width = document.documentElement.clientWidth;
+			var scale = width / 640;
+			var text = "width=640, initial-scale="+scale+", minimum-scale="+scale+" ,maximum-scale="+scale+",user-scalable=no"; //user-scalable=0
+
+			if(ispaid){ //---ipad适配
+				text = "width=640, initial-scale=0.7, minimum-scale=0.7 ,maximum-scale=0.7";
+			}
+			viewport.setAttribute('content',text);
+		})();
+	</script>
+
+	<link rel="stylesheet" type="text/css" href="{{{alifont}}}">
+	<link rel="stylesheet" type="text/css" href="/mobile/statics/css/cube.min.css">
+	<link rel="stylesheet" type="text/css" href="/mobile/dist/reader.css">
+
+</head>
+<body>
+	<div id="app"></div>
+	<!--vue-ssr-outlet-->
+</body>
+</html>
+<script src="/public/statics/js/polyfill.js"></script>
+<script src="/mobile/dist/vendor.js"></script>
+<script src="/mobile/statics/lib/cube.min.js"></script>
+<script src="/mobile/dist/reader.js"></script>

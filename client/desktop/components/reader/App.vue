@@ -42,7 +42,6 @@
 				poetry,
 				index,
 				poems: this.getPoems(index),
-				swipType: "",
 			}
 		},
 
@@ -85,7 +84,6 @@
 		watch:{
 			index(){
 				this.poems = this.getPoems(this.index);
-				
 			}
 		}
 
