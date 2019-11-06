@@ -10,7 +10,7 @@
     "fs-extra": "^8.1.0",
     "gulp-rename": "^1.4.0",
     "moment": "^2.24.0",
-    "mongoose": "^5.6.8",
+    "mongoose": "^5.7.5",
     "serve-favicon": "^2.5.0",
     "vue": "^2.6.10",
     "vue-server-renderer": "^2.6.10"
